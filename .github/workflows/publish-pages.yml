@@ -1,0 +1,52 @@
+name: Publish Boxing Academy homepage
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: boxingacademy-pages
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: sucrebae-star/sparringclub
+          ref: 43f1480025e59424acd2b97e84accfde7f07b223
+          fetch-depth: 0
+          path: source
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify unchanged source and build
+        working-directory: source
+        run: |
+          npm ci --ignore-scripts
+          npm test
+          npm run build
+          npm run test:build
+      - name: Isolate academy domain and verify
+        run: |
+          node prepare.mjs source/dist public
+          node --test tests/*.test.mjs
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: public
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy homepage
+        id: deployment
+        uses: actions/deploy-pages@v4
