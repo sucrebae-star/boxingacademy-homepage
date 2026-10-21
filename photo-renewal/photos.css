@@ -1,0 +1,29 @@
+/* Photo refresh only: retain the approved composition and all existing content. */
+.renewal-photo { display:block; min-width:0; }
+.renewal-photo > img { display:block; width:100%; height:auto; }
+.hero-photo.renewal-photo { display:block; }
+.hero-photo.renewal-photo > img { height:100%; object-fit:contain; object-position:center; }
+.philosophy-photo.renewal-photo { align-self:center; mask-image:none; width:100%; height:auto; aspect-ratio:auto; }
+.philosophy-photo.renewal-photo > img { object-fit:contain; height:auto; aspect-ratio:16/9; }
+.program > .renewal-photo > img { aspect-ratio:16/9; object-fit:contain; }
+.equipment > .renewal-photo { width:100%; }
+.photo-banner > .renewal-photo { position:absolute; top:0; right:0; width:60%; height:100%; z-index:-2; }
+.photo-banner > .renewal-photo > img { height:100%; object-fit:contain; }
+.photo-banner .banner-copy { max-width:40%; }
+.photo-banner::after { display:none; }
+.curriculum-slide > .renewal-photo > img { aspect-ratio:16/9; object-fit:contain; }
+@media (max-width:700px) {
+  .hero-photo.renewal-photo { height:auto; }
+  .hero-photo.renewal-photo > img { height:auto; aspect-ratio:4/5; object-fit:contain; }
+  .philosophy-photo.renewal-photo > img,
+  .program > .renewal-photo > img,
+  .equipment .renewal-photo > img,
+  .photo-banner > .renewal-photo > img,
+  .curriculum-slide > .renewal-photo > img { height:auto; aspect-ratio:4/5; object-fit:contain; }
+  .photo-banner > .renewal-photo { position:relative; top:auto; right:auto; height:auto; width:100%; z-index:auto; }
+  .photo-banner .banner-copy { max-width:none; }
+}
+@media (min-width:1001px) {
+  .hero-copy { width:34%; max-width:34%; }
+  .hero h1 { font-size:clamp(44px,3.7vw,72px); }
+}

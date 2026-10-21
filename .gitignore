@@ -1,0 +1,5 @@
+.cache/
+public/
+artifacts/
+node_modules/
+.taste-skill/

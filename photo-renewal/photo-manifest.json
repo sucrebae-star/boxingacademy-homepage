@@ -1,0 +1,166 @@
+{
+  "version": "2026-10-21-v2",
+  "disclosure": "AI-generated concept photographs, not documentary photographs of members or facilities.",
+  "scenes": {
+    "hero": {
+      "mobile": {
+        "src": "assets/photo-renewal-v2/01-hero-mobile.webp",
+        "width": 1122,
+        "height": 1402,
+        "bytes": 233358,
+        "sha256": "612e290b8a8c727d0d8002002560e6a05385681591ce1f1e82c5dbbe2cd9a29d"
+      },
+      "web": {
+        "src": "assets/photo-renewal-v2/01-hero-web.webp",
+        "width": 1672,
+        "height": 941,
+        "bytes": 193310,
+        "sha256": "fdde7698ccc58c02879cef3735aad1b76f00dce2432b9a4b04b94d4a44517463"
+      }
+    },
+    "philosophy": {
+      "mobile": {
+        "src": "assets/photo-renewal-v2/02-philosophy-mobile.webp",
+        "width": 1122,
+        "height": 1402,
+        "bytes": 176792,
+        "sha256": "59de515c269bb8c444d1cc2999969f5e6d184dd4154dbc470619fb6aadef25d5"
+      },
+      "web": {
+        "src": "assets/photo-renewal-v2/02-philosophy-web.webp",
+        "width": 1672,
+        "height": 941,
+        "bytes": 164864,
+        "sha256": "d328b94b418ccfe475011db28376bf94642b2d193359ed1f25df5148fcd2de99"
+      }
+    },
+    "physical": {
+      "mobile": {
+        "src": "assets/photo-renewal-v2/03-physical-mobile.webp",
+        "width": 1122,
+        "height": 1402,
+        "bytes": 191432,
+        "sha256": "d2d5cf6bff79ea96c7eeeb61642b6fb9052ea965196508913dafacdff7464770"
+      },
+      "web": {
+        "src": "assets/photo-renewal-v2/03-physical-web.webp",
+        "width": 1672,
+        "height": 941,
+        "bytes": 175078,
+        "sha256": "a666640827d488131e83025c7dc2e907da6ad2b7123081977f12cff10d4f4de5"
+      }
+    },
+    "boxing": {
+      "mobile": {
+        "src": "assets/photo-renewal-v2/04-boxing-mobile.webp",
+        "width": 1122,
+        "height": 1402,
+        "bytes": 231934,
+        "sha256": "1510d35b71702f8bdf8472e3f39ebda11ba945013c3b09112bdc0fc9f1abb2d6"
+      },
+      "web": {
+        "src": "assets/photo-renewal-v2/04-boxing-web.webp",
+        "width": 1672,
+        "height": 941,
+        "bytes": 221352,
+        "sha256": "731a58108869c91fd1aa99d3c9269e6d3a6db0da170581824a1db3d758f3edb9"
+      }
+    },
+    "kids": {
+      "mobile": {
+        "src": "assets/photo-renewal-v2/05-kids-mobile.webp",
+        "width": 1122,
+        "height": 1402,
+        "bytes": 197528,
+        "sha256": "78d8ea8c12b22108e44f353d6eaa8d81a2e702e35536ed2e818e4cc702f7d4e0"
+      },
+      "web": {
+        "src": "assets/photo-renewal-v2/05-kids-web.webp",
+        "width": 1672,
+        "height": 941,
+        "bytes": 173552,
+        "sha256": "f122dde93fdee129036f2aca31d0567edf27e94ea6fd20eb91a40b74bec6940b"
+      }
+    },
+    "morning": {
+      "mobile": {
+        "src": "assets/photo-renewal-v2/06-morning-mobile.webp",
+        "width": 1122,
+        "height": 1402,
+        "bytes": 200510,
+        "sha256": "e40cd89dab1bc2ba16e1d4f8e7d24d7d77d71af9a392cf9d5682c57181492135"
+      },
+      "web": {
+        "src": "assets/photo-renewal-v2/06-morning-web.webp",
+        "width": 1672,
+        "height": 941,
+        "bytes": 206716,
+        "sha256": "8009531eafa1fc1efa7e1597a768a486f872fd7cc72536d0da41093f867cb4a4"
+      }
+    },
+    "first-visit": {
+      "mobile": {
+        "src": "assets/photo-renewal-v2/07-first-visit-mobile.webp",
+        "width": 1122,
+        "height": 1402,
+        "bytes": 176276,
+        "sha256": "0df86413b767cd831a2f426c5c7ca83b951a34029f396ae424073bc1b439574a"
+      },
+      "web": {
+        "src": "assets/photo-renewal-v2/07-first-visit-web.webp",
+        "width": 1672,
+        "height": 941,
+        "bytes": 189696,
+        "sha256": "b73ddd95540ada622812019aaa14ef63ab976097db25bbfd94ada4488d7f9ce6"
+      }
+    },
+    "reservation": {
+      "mobile": {
+        "src": "assets/photo-renewal-v2/08-reservation-mobile.webp",
+        "width": 1122,
+        "height": 1402,
+        "bytes": 177962,
+        "sha256": "d779c3af57673a9e620680206e2251ef4a243847aa36d2ccedfb334697134e33"
+      },
+      "web": {
+        "src": "assets/photo-renewal-v2/08-reservation-web.webp",
+        "width": 1672,
+        "height": 941,
+        "bytes": 201826,
+        "sha256": "a5e404216774b32c741778f2c8ca6b381384f924612e211137ecc5457c6dfbaa"
+      }
+    },
+    "heavy-bag": {
+      "mobile": {
+        "src": "assets/photo-renewal-v2/09-heavy-bag-mobile.webp",
+        "width": 1122,
+        "height": 1402,
+        "bytes": 233660,
+        "sha256": "e4ec67ebc1abe91f9aa68f6ad51a6d66e6c6480528c66c4afacdaa0eabd4a390"
+      },
+      "web": {
+        "src": "assets/photo-renewal-v2/09-heavy-bag-web.webp",
+        "width": 1672,
+        "height": 941,
+        "bytes": 225112,
+        "sha256": "9145f300a43c7d593a3b26ed4beb0241aaac4b46ac5cf72c89b32c17c71314bb"
+      }
+    },
+    "circuit": {
+      "mobile": {
+        "src": "assets/photo-renewal-v2/10-circuit-mobile.webp",
+        "width": 1122,
+        "height": 1402,
+        "bytes": 212328,
+        "sha256": "b1cb7567e81b1320ff2d813b99bfa848ef19928a3f866649f4a322133a0aee75"
+      },
+      "web": {
+        "src": "assets/photo-renewal-v2/10-circuit-web.webp",
+        "width": 1672,
+        "height": 941,
+        "bytes": 226706,
+        "sha256": "76a868ee02ee885233ba42f75bf344f6ea621a434f78a5e5023c8ea72ce9ffdf"
+      }
+    }
+  }
+}

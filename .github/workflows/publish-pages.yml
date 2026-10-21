@@ -28,6 +28,7 @@ jobs:
         run: |
           npm ci --ignore-scripts
           npm test
+          node ../apply-photo-renewal.mjs .
           npm run build
           npm run test:build
       - name: Isolate academy domain and verify
