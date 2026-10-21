@@ -1,0 +1,11 @@
+# Academy photograph renewal — 2026-10-21
+
+Ten independently composed desktop/mobile pairs (20 photographs). Generated with the built-in ImageGen tool, then visually reviewed at full frame and enlarged detail. Review covered visible hands, elbows, knees, feet, glove bodies/thumbs/cuffs, mitts, kettlebell grips, and framing. Six selected frames were revised to improve foot clearance or remove distracting pad markings. These are AI concept photographs, not documentary images of actual members or facilities. Visual review cannot guarantee the absence of every generative artifact.
+
+The approved academy layout, official logo, timetable, phone, Kakao reservation, six real class videos, and Sparring Club authentication/data remain intact. Eight pairs replace homepage photography; heavy-bag and circuit pairs replace the corresponding physical-training detail photographs. Remaining curriculum images and real video posters are unchanged.
+
+`apply-photo-renewal.mjs` applies narrow, asserted changes to the pinned upstream checkout at build time. Run the upstream source tests before applying it (they test the original curriculum contract), then build and run built-output tests. The Pages wrapper tests additionally verify all twenty deployed asset checksums, responsive picture sources, booking and domain separation.
+
+Local verification: 19 upstream tests, 5 built-output tests, 7 wrapper tests passed. Chromium through the Playwright MCP checked 1920/1440/768/390px: no horizontal document overflow or broken homepage images. Desktop/mobile picture sources switched correctly. Mobile menu opened and closed with Escape; wheel scrolling worked; heavy-bag/circuit detail navigation selected the new responsive images. The taste skill source linter reported 0 FAIL / 0 WARN. Its standalone inspector could not locate a locally installed Chrome; browser review was performed through the available Playwright MCP instead.
+
+Use `photo-manifest.json` for dimensions, file sizes and SHA-256 checksums. WebP total is approximately 3.8 MiB; only the hero is eager/high priority, and lower photos load lazily. Existing AI disclosure remains visible in the footer and descriptive alternatives remain available.
