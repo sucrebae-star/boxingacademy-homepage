@@ -1,0 +1,24 @@
+{
+  "name": "boxing-academy-offline-preview",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "test:browser": "node tests/offline-browser.mjs"
+  },
+  "dependencies": {
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "@tailwindcss/postcss": "4.3.3",
+    "postcss": "8.5.30",
+    "tailwindcss": "4.3.3"
+  },
+  "engines": {
+    "node": ">=22.13.0"
+  }
+}
