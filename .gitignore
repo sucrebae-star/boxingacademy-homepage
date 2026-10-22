@@ -3,3 +3,9 @@ public/
 artifacts/
 node_modules/
 .taste-skill/
+legacy-public/
+academy-source/node_modules/
+academy-source/.build/
+academy-source/output/
+academy-source/output-web/
+academy-source/docs/asset-manifest.json

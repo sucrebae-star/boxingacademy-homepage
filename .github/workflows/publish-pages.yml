@@ -2,6 +2,8 @@ name: Publish Boxing Academy homepage
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read
@@ -31,14 +33,24 @@ jobs:
           node ../apply-photo-renewal.mjs .
           npm run build
           npm run test:build
-      - name: Isolate academy domain and verify
+      - name: Preserve the verified academy shell and original shared links
         run: |
-          node prepare.mjs source/dist public
-          node --test tests/*.test.mjs
+          node prepare.mjs source/dist legacy-public
+          ACADEMY_OUTPUT=legacy-public node --test tests/*.test.mjs
+          cp -R legacy-public public
+      - name: Build and verify the reviewed branch-selection homepage
+        working-directory: academy-source
+        run: |
+          npm ci --ignore-scripts
+          npm run build
+          npm test
+          node build.mjs --production --out ../public
+          PRODUCTION_OUTPUT=../public node --test tests/production/*.test.mjs
       - uses: actions/upload-pages-artifact@v4
         with:
           path: public
   deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
     permissions:
