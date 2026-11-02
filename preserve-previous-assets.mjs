@@ -20,7 +20,12 @@ export async function preservePreviousAssets({output,source='academy-source',ori
  if(!/^[a-f0-9]{16}$/.test(manifest.version)||!bundles.length||!bundles.every(bundlePath)||!manifest.assets?.every(a=>assetPath(a.url)&&sourcePath(a.source)))throw Error('Unexpected published asset manifest');
  const old=await remote('asset-history.json',true);
  const prior=old?JSON.parse(old.toString()).releases||[]:[];
- const releases=[{version:manifest.version,assetVersion:manifest.assetVersion,bundles,assets:manifest.assets},...prior.filter(r=>r.version!==manifest.version)].slice(0,2);
+ const now=Date.now();
+ const candidates=[{version:manifest.version,assetVersion:manifest.assetVersion,bundles,assets:manifest.assets,firstSeenAt:prior.find(r=>r.version===manifest.version)?.firstSeenAt||now},...prior.filter(r=>r.version!==manifest.version)].map(r=>({...r,firstSeenAt:Number.isFinite(r.firstSeenAt)?r.firstSeenAt:now}));
+ // Keep two previous releases AND a full day for open/deferred pages. This is
+ // publication compatibility, not deletion of any local source or user data.
+ const releases=candidates.filter((r,i)=>i<2||now-r.firstSeenAt<86400000);
+ if(releases.length>48)throw Error('Asset history requires review; refusing to drop active-page assets');
  let reused=0,downloaded=0;
  for(const release of releases) {
   if(!/^[a-f0-9]{16}$/.test(release.version)||!release.bundles?.every(bundlePath)||!release.assets?.every(a=>assetPath(a.url)&&sourcePath(a.source)))throw Error('Unsafe historical asset path');

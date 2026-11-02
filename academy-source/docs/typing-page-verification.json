@@ -1,6 +1,7 @@
 {
   "date": "2026-11-02",
   "checks": [
+    "Gallery contains only the three cropped Korean practice scenes, with original-image zoom links",
     "Eight native folds default closed; Enter/Space; multiple open; expand/collapse all; direct anchor opens correct fold",
     "Approved source preserved except the single user-approved factual correction",
     "Download OS tabs support arrow keys; Mac pinned verified release; Windows trial is clearly marked with remaining publisher-signature and physical-installation checks",
@@ -46,7 +47,7 @@
       "version": "output-baseline",
       "requests": 10,
       "bodyBytes": 1572409,
-      "domContentLoadedMs": 34,
+      "domContentLoadedMs": 37,
       "fcpMs": 36,
       "apiRequests": 0
     },
@@ -54,9 +55,9 @@
       "page": "homepage",
       "version": "output-web",
       "requests": 10,
-      "bodyBytes": 1635590,
-      "domContentLoadedMs": 38,
-      "fcpMs": 40,
+      "bodyBytes": 1637824,
+      "domContentLoadedMs": 37,
+      "fcpMs": 28,
       "apiRequests": 0
     }
   ],

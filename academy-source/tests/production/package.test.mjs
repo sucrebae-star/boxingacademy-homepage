@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync,existsSync} from 'node:fs';
+import {createHash} from 'node:crypto';
 import path from 'node:path';
 import vm from 'node:vm';
 const output=path.resolve(process.env.PRODUCTION_OUTPUT||'output-web');
@@ -15,6 +16,7 @@ test('production ships small HTML and externally loaded photo/video assets',()=>
  assert.equal(manifest.mode,'production');
  assert.equal(manifest.assets.filter(p=>p.type==='video/mp4').length,6);
  for(const asset of manifest.assets)assert.ok(existsSync(path.join(output,asset.url)),asset.url);
+ for(const asset of manifest.assets)assert.ok(asset.url.startsWith('assets/site-'+createHash('sha256').update(readFileSync(asset.source)).digest('hex').slice(0,16)+'/'),asset.source);
  assert.ok(html.includes("globalThis.__SITE_MODE__='production'"));
  assert.ok(!html.includes('오프라인 시연본'));
  assert.ok(!html.includes('배포되지 않은 시연본'));

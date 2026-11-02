@@ -27,6 +27,8 @@
 .tf-proof-layout>figure img{width:min(100%,480px);height:auto;margin-inline:auto}
 .tf-proof-layout>div>p{margin-block:24px 36px;max-width:42ch}.tf-proof-layout>div>figure{background:white;padding:24px}
 .tf-proof-layout>div>figure img{width:100%;height:auto}
+.tf-korean-main{transform:none}.tf-korean-only{grid-template-columns:1fr 1fr;gap:32px;margin-top:32px}.tf-korean-only>figure{padding:24px;background:white;transform:none}.tf-korean-only h3{font-size:27px;margin-bottom:24px}.tf-korean-only>figure img{width:100%;height:auto;max-height:none}.tf-ui-zoom{display:block}.tf-ui-zoom img{object-fit:contain}.tf-language-note{font-size:17px;line-height:1.8;margin-top:20px;max-width:65ch}
+@media(max-width:700px){.tf-korean-only{grid-template-columns:1fr;gap:28px}.tf-korean-only>figure{max-width:none;padding:16px}.tf-korean-only>figure img{width:100%;max-height:none}.tf-korean-only h3{font-size:24px;margin-bottom:20px}.tf-language-note{font-size:16px}}
 .tf-fold{background:white;scroll-margin-top:calc(var(--header) + var(--subnav) + 20px)}
 .tf-fold+.tf-fold{margin-top:12px}.tf-fold:nth-child(even){background:var(--tone)}
 .tf-fold summary{display:flex;gap:24px;align-items:flex-start;justify-content:space-between;list-style:none;cursor:pointer;padding:28px 32px}

@@ -14,11 +14,13 @@ if(output===root||output===path.dirname(root)||output.startsWith(path.join(root,
 await mkdir(output,{recursive:true});await mkdir('.build',{recursive:true});
 const types={'.webp':'image/webp','.png':'image/png','.woff2':'font/woff2','.mp4':'video/mp4'};
 async function assetPaths(dir){let result=[];for(const d of await readdir(dir,{withFileTypes:true})){const p=path.posix.join(dir,d.name);result.push(...(d.isDirectory()?await assetPaths(p):[p]));}return result;}
-const files=(await assetPaths('assets')).filter(p=>types[path.extname(p)]);
-const data={};const assetHash=createHash('sha256');
-for(const p of files){const bytes=await readFile(p);assetHash.update(p).update(bytes);if(!production)data[p]=`data:${types[path.extname(p)]};base64,${bytes.toString('base64')}`;}
+// Superseded UI captures remain in source for old published pages, not in the new gallery/bundle.
+const retiredAssets=new Set(['assets/typing/20261102/practice.webp','assets/typing/20261102/packs.webp','assets/typing/20261102/languages.webp']);
+const files=(await assetPaths('assets')).filter(p=>types[path.extname(p)]&&!retiredAssets.has(p));
+const data={},fileVersions={};const assetHash=createHash('sha256');
+for(const p of files){const bytes=await readFile(p);fileVersions[p]=createHash('sha256').update(bytes).digest('hex').slice(0,16);assetHash.update(p).update(bytes);if(!production)data[p]=`data:${types[path.extname(p)]};base64,${bytes.toString('base64')}`;}
 const assetVersion=assetHash.digest('hex').slice(0,16);
-if(production)for(const p of files){data[p]=`assets/site-${assetVersion}/${p.slice(7)}`;await mkdir(path.dirname(path.join(output,data[p])),{recursive:true});await cp(p,path.join(output,data[p]));}
+if(production)for(const p of files){data[p]=`assets/site-${fileVersions[p]}/${p.slice(7)}`;await mkdir(path.dirname(path.join(output,data[p])),{recursive:true});await cp(p,path.join(output,data[p]));}
 const cssInput=(await readFile('src/style.css','utf8')+'\n'+await readFile('src/typing.css','utf8')).replace("url('../assets/pretendard-variable.woff2')",`url('${data['assets/pretendard-variable.woff2']}')`);
 const css=(await postcss([tailwind({optimize:true})]).process(cssInput,{from:path.resolve('src/style.css')})).css;
 const script=(await build({absWorkingDir:root,entryPoints:['src/client.jsx'],bundle:true,minify:true,write:false,format:'iife',platform:'browser',target:['es2020'],jsx:'automatic',loader:{'.md':'text'},define:{'__PRODUCTION_SITE__':production?'true':'false','process.env.NODE_ENV':'"production"'},legalComments:'none'})).outputFiles[0].text;

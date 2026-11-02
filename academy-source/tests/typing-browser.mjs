@@ -12,6 +12,8 @@ try {
  const page=await ctx.newPage();page.on('pageerror',e=>report.errors.push(e.message));
  await page.goto(target);await page.locator('.tf-fold').last().waitFor();await page.waitForFunction(()=>document.activeElement?.id==='typing-title');
  assert.equal(await page.locator('.tf-fold[open]').count(),0);
+ assert.equal(await page.locator('#guide-2 blockquote').isVisible(),false,'Closed founder quotation must not be painted over another fold');
+ const gallery=await page.locator('#typing-app img').evaluateAll(images=>images.map(i=>i.getAttribute('src')));assert.equal(gallery.length,3);assert.ok(gallery.every(src=>/ko-(keys|short|long)\.webp/.test(src)));assert.equal(await page.locator('#typing-app img[src*="packs"],#typing-app img[src*="languages"]').count(),0);report.checks.push('Gallery contains only the three cropped Korean practice scenes, with original-image zoom links');
  await page.locator('#guide-1 summary').focus();await page.keyboard.press('Enter');assert.equal(await page.locator('#guide-1').getAttribute('open'),'');
  await page.keyboard.press('Space');assert.equal(await page.locator('.tf-fold[open]').count(),0);
  await page.locator('#guide-1 summary').click();await page.locator('#guide-2 summary').click();assert.equal(await page.locator('.tf-fold[open]').count(),2);
