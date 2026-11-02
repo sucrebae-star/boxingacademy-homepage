@@ -1,0 +1,5 @@
+{
+  "date": "2026-11-02",
+  "mac": {"version":"0.1.4","platform":"darwin-aarch64","url":"https://app.boxingacademy.pe.kr/assets/typing-academy/releases/0.1.4/TypingAcademy-0.1.4-macOS-arm64.zip","status":200,"bytes":31924209,"sha256":"c4c107378231e2a06f447244384c53460cd0f7f3747fdf2fd7daa58094ac3fec","fullPublicDownloadHashVerified":true,"existingAppleSignatureNotarizationEvidenceReused":true,"physicalInstallMemberLoginVerifiedInThisTask":false},
+  "windows": {"version":"0.1.4","platform":"windows-x86_64","channel":"verification-pending-trial","url":"https://app.boxingacademy.pe.kr/assets/typing-academy/releases/0.1.4/TypingAcademy-0.1.4-windows-x86_64-setup.exe","status":200,"bytes":248457211,"sha256":"47d16001a5d037c9ceb96e43d531e0285d655685a3656c15a521a976b7f48f26","fullPublicDownloadHashVerified":true,"existingUpdateSignatureEvidenceReused":true,"authenticodeVerified":false,"physicalInstallUpgradeVerifiedInThisTask":false,"userRequestedTrialAfterInitialHold":true}
+}

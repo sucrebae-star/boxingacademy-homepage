@@ -46,6 +46,8 @@ jobs:
           npm test
           node build.mjs --production --out ../public
           PRODUCTION_OUTPUT=../public node --test tests/production/*.test.mjs
+      - name: Preserve the last two published asset sets for already-open pages
+        run: node preserve-previous-assets.mjs --out public
       - uses: actions/upload-pages-artifact@v4
         with:
           path: public

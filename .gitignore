@@ -8,4 +8,8 @@ academy-source/node_modules/
 academy-source/.build/
 academy-source/output/
 academy-source/output-web/
+academy-source/output-baseline/
+academy-source/.taste-skill/
+academy-source/screenshots/
+academy-source/docs/browser-verification.json
 academy-source/docs/asset-manifest.json

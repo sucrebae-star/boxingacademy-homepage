@@ -1,0 +1,49 @@
+# 타이핑사관학교 페이지 · 2026-11-02
+
+기존 React 19/esbuild/Tailwind 정적 사이트와 GitHub Pages를 재사용한다. 효천본관의 ‘오시는 길’ 다음에 타이핑사관학교 탭을 추가한다. 같은 SPA에서 이동할 때 기존 문의 초안을 보존하고, 직접 접속·공유용 `typing-academy.html`은 별도의 서버 렌더 HTML/제목/OG/사이트맵을 제공한다.
+
+## 기존 패턴과 새 보완
+
+기존 검정·종이색·빨강/Pretendard/버튼/지점 메뉴/접기 패턴/공식 로고/호스팅/회원 앱을 재사용했다. 새로 만든 것은 소개 페이지, 부모님 안내 다중 아코디언, 컴퓨터 종류 탭, 모바일 다운로드 차단, 웹 업데이트 선택 안내이다. 다른 지점·프로그램·요금·예약·스파링클럽은 바꾸지 않는다.
+
+디자인 방향은 ‘The page is the object’: 부모와 함께 읽는 연습 안내장과 실제 앱 미리보기 조각. 관장의 어린 시절 약속, 부모의 옆자리, 손가락 안내, 다섯 연습 언어, 회원 연결, 플랫폼별 설치 조건을 핵심 재료로 삼았다. 기존 브랜드와 무관한 줄무늬·서체·색을 새로 만들지 않았다.
+
+새 AI 콘셉트 사진은 ChatGPT 웹 화면상 Pro 모드에서 생성하고 결과를 확인했다. 정확한 기반 모델명은 화면에 표시되지 않았다. 실제 회원·시설 사진이 아님을 표시한다. 추가 그림은 실제 앱 웹 미리보기의 손 안내/언어팩/언어 설정 3개이며 개인정보·가상 후기·성적을 홍보하지 않는다. Claude Opus 5.5 높음에서 실제 설립 취지·부모 동반·라이선스 표현 검수를 받았으며, 뒤에 사용자가 제공한 확정 문서가 최종 본문 기준이다.
+
+## 원고와 요구 대조
+
+- 사용자는 부모님 안내를 같은 타이핑 페이지에 넣도록 확인했다.
+- 확정 Markdown은 그대로 보존했다. 단, 사용자 승인에 따라 ‘구조물은 받침이 있어야 버팁니다’ 한 문장만 중력 블록/일반 블록 차이로 정정했다. 원본 대조 검증을 수행했다.
+- 8개 폴드 기본 접힘, 제목과 요약 노출, 다중 펼침, 모두 펼치기/접기, `#guide-1`~`#guide-8`, 능력 8개 그리드, ✕/○ 대비, 모바일 기록표 내부 스크롤, 출처/상표 고지를 포함한다.
+- 사용자가 처음에는 Windows 준비 중을 선택했다가, 이후 기존 설치 파일 제공을 요청했다. 최신 지시에 따라 ‘검증 중 시험판’으로 제공한다. 게시자 서명과 실제 Windows 설치·업그레이드 검증을 완료했다고 표현하지 않는다.
+- 휴대폰·태블릿은 실제 설치 파일 링크를 만들지 않으며, 5개 다운로드 진입점에서 PC 접속 안내를 보여준다. JavaScript를 끈 경우에도 설치 URL이 없는 버튼으로 남는다. 이는 페이지 UI 차단이며 공개 파일 주소 자체의 기기 인증/접근통제는 아니다.
+- Mac 0.1.4(Apple Silicon)과 Windows 0.1.4(x64) 기존 배포본을 재사용하고 각자 고유 정적 버전 경로로 제공한다. 기존 앱 업데이트 채널·서명키·인증·DB·미게시 앱 소스는 수정하지 않았다.
+- Minecraft Education은 공식 다운로드/가정용 계정·라이선스 안내로만 연결한다. 설치 파일 재배포·계정 생성·구매·게임 로고/캐릭터/화면 사용은 하지 않는다. 체육관 회원권에 이용권이 포함되지 않음을 표시한다.
+
+## 검증과 보존
+
+단위 시험, 생산 빌드, Chromium/WebKit 기반 기능 검증, 360/390/768/1440px 가로 넘침·그림·제목 검사, 키보드·직접 앵커·문의 초안 보존을 검사했다. iPhone/Android/iPad 데스크톱 UA 브라우저 에뮬레이션에서 5개 다운로드 버튼 모두 차단되고 외부 요청이 0회임을 확인했다. 실제 휴대폰/네이티브 앱 설치 검증과는 구분한다.
+
+웹 업데이트는 기존 SW 등록을 재사용하며 시작 시 현재 SW와 로컬 메시지로 비교하고 복귀 시 5분 제한 검사를 한다. 같은/오래된 버전 무안내, 새 버전 안내, 미저장 초안 중 갱신 차단, 나중에 12시간 미루기, 후속 버전 재안내, 명시적 새로고침, 오프라인 사용을 검사했다. 이미 열린 구 페이지의 파일이 사라지지 않도록 배포 때 직전 공개 자산 2세대를 보존한다.
+
+디자인 검사 실패 0개(사용자 요구에 따른 네이티브 아코디언 및 확정 원고의 비가시 텍스트를 오인한 eyebrow/icon-cards만 예외). 기존 브랜드 종이색·공통 서체 크기, 실제 영상이 없는 점, 지점 메뉴/기록표의 의도된 내부 가로 스크롤은 사유를 확인하고 유지했다. 사진 1개+실제 UI 3개, 섹션 진입 동작 16개, reduced-motion에서는 동작을 끈다.
+
+홈페이지 냉시작 로컬 비교: 요청 10→10회, 본문 전송 1,572,409→1,634,602B(+62,193B, 새 UI/확정 원고 코드). DOMContentLoaded/FCP의 전후 값은 검증 JSON에 함께 남겼으며 단일 로컬 측정이므로 일반 성능 보장이 아니다. API 요청 0→0, 회원/DB 조회 없음. 다운로드는 클릭 때만 시작하며 모바일은 시작하지 않는다.
+
+기존 오프라인 전체 화면 시험도 다시 실행해 16개 화면, 두 지점의 수업 상세/캐러셀, 메뉴/Escape/앞뒤 이동, 문의 복사·보존, 원본 6개 MP4의 오프라인 재생을 확인했다. Chromium/WebKit 엔진 시험이며 실제 Safari나 네이티브 앱 설치 시험으로 대체하지 않는다.
+
+공개 배포 상태는 GitHub Actions 및 실제 HTTPS 페이지를 확인한 뒤 최종 보고에서 분리한다. Mac/Windows 실제 PC에서 설치·회원 로그인·연습은 별도 확인 항목이며 이 웹페이지 검증으로 성공 처리하지 않는다.
+
+## 변경·추가 파일
+
+공유 연결: `.github/workflows/publish-pages.yml`, `.gitignore`, `academy-source/build.mjs`, `academy-source/src/App.jsx`, `academy-source/src/client.jsx`, `academy-source/src/render.jsx`, `academy-source/src/navigation.mjs`.
+
+새 화면·본문: `academy-source/src/components/TypingAcademy.jsx`, `WebUpdateNotice.jsx`, `academy-source/src/parent-guide.mjs`, `typing.css`, `content/parent-guide.md`.
+
+이미지: `academy-source/assets/typing/20261102/`의 `family.webp`, `family-small.webp`, `practice.webp`, `packs.webp`, `languages.webp`.
+
+보존·시험: `preserve-previous-assets.mjs`, `tests/preserve-assets.test.mjs`, `academy-source/tests/typing.test.mjs`, `typing-browser.mjs`, `web-update-browser.mjs`.
+
+기록: 이 문서 및 `academy-source/docs/typing-page-verification.json`, `typing-web-update-verification.json`, `typing-download-verification.json`. 로컬 작업 원본과 화면 검수 캡처는 별도 작업 폴더에 보관하고 공개 소스에 개인 경로·인증 정보를 넣지 않는다.
+
+별도 기존 앱 서버에는 검증된 Mac/Windows 바이너리 복사본 2개만 `/assets/typing-academy/releases/0.1.4/`에 추가했다. 두 공개 URL의 전체 파일을 각각 1회 내려받아 원본 SHA-256 및 바이트 수와 일치함을 확인했다. 인증·DB·서버 코드·기존 업데이트 manifest는 수정하지 않았다.
