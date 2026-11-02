@@ -33,6 +33,20 @@ test('official domain owns SEO and homepage install identity',()=>{
  assert.deepEqual(manifest.icons.map(icon=>icon.sizes),['192x192','512x512']);
  assert.ok(manifest.icons.every(icon=>existsSync(path.join(output,icon.src))));
 });
+test('Record brochure shares the shell without mounting hidden homepage media',()=>{
+ const record=read('record-system.html');
+ assert.ok(record.includes('rel="canonical" href="'+origin+'/record-system.html"'));
+ assert.ok(record.includes('id="jeonju-record"'));
+ assert.ok(record.includes('https://apps.apple.com/kr/app/id6795803128'));
+ assert.ok(record.includes('https://play.google.com/store/apps/details?id=kr.pe.boxingacademy.record'));
+ assert.ok(record.includes('https://app.boxingacademy.pe.kr/record.html'));
+ assert.ok(!record.includes('class="portal shell"'));
+ assert.ok(read('sitemap.xml').includes(origin+'/record-system.html'));
+ const manifest=JSON.parse(read('asset-manifest.json'));
+ assert.equal(manifest.assets.filter(x=>x.source.startsWith('assets/record-system/')).length,13);
+ assert.ok(manifest.assets.some(x=>x.type==='image/svg+xml'));
+ assert.ok(manifest.assets.some(x=>x.type==='image/jpeg'));
+});
 test('new and legacy links retain the correct academy or club destination',()=>{
  const routeName=html.match(/src="(academy-v2-routing\.[^"]+)"/)[1];
  const routing=read(routeName);

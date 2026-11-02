@@ -15,6 +15,9 @@ test('approved parent guide retains all eight folds, summaries, table and full s
 test('typing-only anchors do not leak the route onto another branch',()=>{
  assert.deepEqual(parseRoute('#jeonju/typing'),{page:'jeonju',section:'typing'});
  assert.deepEqual(parseRoute('#yeoksam/typing'),{page:'yeoksam',section:null});
+ assert.deepEqual(parseRoute('#jeonju/record'),{page:'jeonju',section:'record'});
+ assert.deepEqual(parseRoute('#yeoksam/record'),{page:'yeoksam',section:null});
+ assert.deepEqual(parseRoute('#record'),{page:'home',section:null});
  for(let i=1;i<=8;i++)assert.deepEqual(parseRoute('#guide-'+i),{page:'jeonju',section:'typing',anchor:'guide-'+i});
  assert.deepEqual(parseRoute('#typing-download'),{page:'jeonju',section:'typing',anchor:'typing-download'});
 });

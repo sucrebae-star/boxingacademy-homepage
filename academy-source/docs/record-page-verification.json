@@ -1,0 +1,153 @@
+{
+  "url": "http://127.0.0.1:4829/output-web/record-system.html",
+  "errors": [],
+  "layouts": [
+    {
+      "width": 320,
+      "overflow": 0,
+      "badTitles": [],
+      "broken": 0,
+      "stores": [
+        {
+          "href": "https://apps.apple.com/kr/app/id6795803128",
+          "bottom": 422.375
+        },
+        {
+          "href": "https://play.google.com/store/apps/details?id=kr.pe.boxingacademy.record",
+          "bottom": 504.375
+        }
+      ],
+      "activeNavVisible": true,
+      "current": "기록시스템",
+      "weight": [
+        "800",
+        "800"
+      ]
+    },
+    {
+      "width": 360,
+      "overflow": 0,
+      "badTitles": [],
+      "broken": 0,
+      "stores": [
+        {
+          "href": "https://apps.apple.com/kr/app/id6795803128",
+          "bottom": 431.34375
+        },
+        {
+          "href": "https://play.google.com/store/apps/details?id=kr.pe.boxingacademy.record",
+          "bottom": 431.34375
+        }
+      ],
+      "activeNavVisible": true,
+      "current": "기록시스템",
+      "weight": [
+        "800",
+        "800"
+      ]
+    },
+    {
+      "width": 390,
+      "overflow": 0,
+      "badTitles": [],
+      "broken": 0,
+      "stores": [
+        {
+          "href": "https://apps.apple.com/kr/app/id6795803128",
+          "bottom": 439.09375
+        },
+        {
+          "href": "https://play.google.com/store/apps/details?id=kr.pe.boxingacademy.record",
+          "bottom": 439.09375
+        }
+      ],
+      "activeNavVisible": true,
+      "current": "기록시스템",
+      "weight": [
+        "800",
+        "800"
+      ]
+    },
+    {
+      "width": 768,
+      "overflow": 0,
+      "badTitles": [],
+      "broken": 0,
+      "stores": [
+        {
+          "href": "https://apps.apple.com/kr/app/id6795803128",
+          "bottom": 581
+        },
+        {
+          "href": "https://play.google.com/store/apps/details?id=kr.pe.boxingacademy.record",
+          "bottom": 581
+        }
+      ],
+      "activeNavVisible": true,
+      "current": "기록시스템",
+      "weight": [
+        "800",
+        "800"
+      ]
+    },
+    {
+      "width": 1440,
+      "overflow": 0,
+      "badTitles": [],
+      "broken": 0,
+      "stores": [
+        {
+          "href": "https://apps.apple.com/kr/app/id6795803128",
+          "bottom": 685.421875
+        },
+        {
+          "href": "https://play.google.com/store/apps/details?id=kr.pe.boxingacademy.record",
+          "bottom": 685.421875
+        }
+      ],
+      "activeNavVisible": true,
+      "current": "기록시스템",
+      "weight": [
+        "800",
+        "800"
+      ]
+    }
+  ],
+  "metrics": {
+    "home": {
+      "requests": 10,
+      "bytes": 1672024,
+      "api": 0,
+      "recordAssets": 0,
+      "timing": {
+        "dcl": 99,
+        "fcp": 92
+      }
+    },
+    "typing-academy.html": {
+      "requests": 11,
+      "bytes": 1089834,
+      "api": 0,
+      "recordAssets": 0,
+      "timing": {
+        "dcl": 47.199999928474426,
+        "fcp": 48
+      }
+    },
+    "record-system.html": {
+      "requests": 14,
+      "bytes": 1187689,
+      "api": 0,
+      "recordAssets": 7,
+      "timing": {
+        "dcl": 46.200000047683716,
+        "fcp": 32
+      }
+    }
+  },
+  "checks": [
+    "Four-screen keyboard tabs, native dialog/Escape/focus, all three device choices, health FAQ and old web link",
+    "Direct SSR/hash route, Typing/Record transitions, back/forward and in-memory collaboration draft preserved",
+    "Phone store links remain available; no-JS core/store/FAQ access; WebKit narrow layout"
+  ]
+}

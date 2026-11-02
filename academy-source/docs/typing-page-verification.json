@@ -47,17 +47,17 @@
       "version": "output-baseline",
       "requests": 10,
       "bodyBytes": 1572409,
-      "domContentLoadedMs": 37,
-      "fcpMs": 36,
+      "domContentLoadedMs": 36,
+      "fcpMs": 28,
       "apiRequests": 0
     },
     {
       "page": "homepage",
       "version": "output-web",
       "requests": 10,
-      "bodyBytes": 1637824,
+      "bodyBytes": 1672024,
       "domContentLoadedMs": 37,
-      "fcpMs": 28,
+      "fcpMs": 36,
       "apiRequests": 0
     }
   ],

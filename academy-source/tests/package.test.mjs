@@ -7,7 +7,7 @@ const html=readFileSync('output/index.html','utf8');
 const assetText=html.split('<script>globalThis.__ASSETS__=')[1].split(';</script>')[0];
 const assets=JSON.parse(assetText);
 test('standalone file embeds every photograph, font and official logo',()=>{
- for(const [p,v] of Object.entries(assets)){assert.ok(/^data:(image\/webp|image\/png|font\/woff2);base64,/.test(v),p);const bytes=Buffer.from(v.split(',')[1],'base64');assert.equal(createHash('sha256').update(bytes).digest('hex'),createHash('sha256').update(readFileSync(p)).digest('hex'),p);}
+ for(const [p,v] of Object.entries(assets)){assert.ok(/^data:(image\/webp|image\/png|image\/jpeg|image\/svg\+xml|font\/woff2);base64,/.test(v),p);const bytes=Buffer.from(v.split(',')[1],'base64');assert.equal(createHash('sha256').update(bytes).digest('hex'),createHash('sha256').update(readFileSync(p)).digest('hex'),p);}
  assert.ok(assets['assets/logo.png']);assert.ok(assets['assets/pretendard-variable.woff2']);
  for(const m of html.matchAll(/<(?:img|source|script|link)\b[^>]*\s(?:src|srcset|href)="([^"]+)"/g))assert.ok(m[1].startsWith('data:'),m[0].slice(0,100));
  assert.ok(!/navigator\.serviceWorker|firebase|googletagmanager\.com/.test(html));
