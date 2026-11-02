@@ -5,7 +5,7 @@ const {chromium,devices,webkit}=await import(process.env.PLAYWRIGHT_MODULE||'pla
 const base=process.env.TYPING_TEST_ORIGIN||'http://127.0.0.1:4829';
 const target=process.env.TYPING_PAGE_URL||base+'/output-web/typing-academy.html';
 const out='.taste-skill/typing-functional';await mkdir(out,{recursive:true});
-const report={date:'2026-11-02',checks:[],screens:[],traffic:[],errors:[]};
+const report={date:'2026-11-03',checks:[],screens:[],traffic:[],errors:[]};
 const browser=await chromium.launch({headless:true});
 try {
  const ctx=await browser.newContext({viewport:{width:1440,height:1000},reducedMotion:'reduce',serviceWorkers:'block'});
@@ -33,8 +33,8 @@ try {
   if(width===360){await page.locator('#guide-7 summary').click();assert.ok(await page.locator('.tf-table-wrap').evaluate(el=>el.scrollWidth>el.clientWidth));assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false);await page.screenshot({path:`${out}/guide-table-360.png`,fullPage:true});}
  }
  await page.setViewportSize({width:1440,height:1000});await page.goto(target+'#typing-download');
- await page.waitForFunction(()=>document.activeElement?.id==='typing-download-title');await page.getByRole('tab',{name:'Mac',exact:true}).focus();await page.keyboard.press('ArrowRight');assert.equal(await page.getByRole('tab',{name:'Windows',exact:true}).getAttribute('aria-selected'),'true');assert.ok((await page.getByRole('link',{name:'Windows 시험판 다운로드',exact:true}).getAttribute('href')).endsWith('TypingAcademy-0.1.4-windows-x86_64-setup.exe'));assert.ok((await page.locator('#download-windows').innerText()).includes('게시자 서명과 실제 PC 설치·업그레이드 검증은 아직 끝나지 않았습니다'));
- await page.keyboard.press('ArrowLeft');assert.ok((await page.getByRole('link',{name:'Mac용 다운로드',exact:true}).getAttribute('href')).endsWith('TypingAcademy-0.1.4-macOS-arm64.zip'));
+ await page.waitForFunction(()=>document.activeElement?.id==='typing-download-title');await page.getByRole('tab',{name:'Mac',exact:true}).focus();await page.keyboard.press('ArrowRight');assert.equal(await page.getByRole('tab',{name:'Windows',exact:true}).getAttribute('aria-selected'),'true');assert.ok((await page.getByRole('link',{name:'Windows 시험판 다운로드',exact:true}).getAttribute('href')).endsWith('TypingAcademy-0.1.6-windows-x86_64-setup.exe'));assert.ok((await page.locator('#download-windows').innerText()).includes('게시자 서명과 실제 PC 설치·업그레이드 검증은 아직 끝나지 않았습니다'));
+ await page.keyboard.press('ArrowLeft');assert.ok((await page.getByRole('link',{name:'Mac용 다운로드',exact:true}).getAttribute('href')).endsWith('TypingAcademy-0.1.6-macOS-arm64.zip'));
  report.checks.push('Download OS tabs support arrow keys; Mac pinned verified release; Windows trial is clearly marked with remaining publisher-signature and physical-installation checks');
  const subnav=await page.locator('.branch-subnav a').allTextContents();assert.ok(subnav.indexOf('타이핑사관학교')===subnav.indexOf('오시는 길')+1);
  const tools=await page.locator('.branch-tools').evaluate(el=>({gap:parseFloat(getComputedStyle(el).marginInlineStart),weights:[...el.querySelectorAll('a')].map(a=>getComputedStyle(a).fontWeight),logo:el.querySelector('img')?.naturalWidth,record:el.querySelectorAll('a')[1]?.href}));assert.equal(tools.gap,24);assert.deepEqual(tools.weights,['800','800']);assert.equal(tools.logo,128);assert.equal(tools.record,new URL('record-system.html',target).href);report.checks.push('Typing app logo, extra spacing and two bold tool tabs; official Record link without member API reads');
