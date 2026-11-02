@@ -116,32 +116,32 @@
   "metrics": {
     "home": {
       "requests": 10,
-      "bytes": 1672024,
+      "bytes": 1673563,
       "api": 0,
       "recordAssets": 0,
       "timing": {
-        "dcl": 99,
-        "fcp": 92
+        "dcl": 33.90000009536743,
+        "fcp": 36
       }
     },
     "typing-academy.html": {
       "requests": 11,
-      "bytes": 1089834,
+      "bytes": 1092062,
       "api": 0,
       "recordAssets": 0,
       "timing": {
-        "dcl": 47.199999928474426,
-        "fcp": 48
+        "dcl": 41.89999997615814,
+        "fcp": 32
       }
     },
     "record-system.html": {
       "requests": 14,
-      "bytes": 1187689,
+      "bytes": 1189228,
       "api": 0,
       "recordAssets": 7,
       "timing": {
-        "dcl": 46.200000047683716,
-        "fcp": 32
+        "dcl": 43.39999997615814,
+        "fcp": 40
       }
     }
   },

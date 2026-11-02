@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {parseParentGuide,isMobileDownloadClient,typingRelease} from '../src/parent-guide.mjs';
+import {parseParentGuide,isMobileDownloadClient,typingRelease,windowsTrialRelease} from '../src/parent-guide.mjs';
 import {parseRoute} from '../src/navigation.mjs';
 const raw=readFileSync('src/content/parent-guide.md','utf8');
 test('approved parent guide retains all eight folds, summaries, table and full story',()=>{
@@ -24,5 +24,14 @@ test('typing-only anchors do not leak the route onto another branch',()=>{
 test('phone and tablet downloads are denied without treating a narrow desktop as a phone',()=>{
  for(const client of [{userAgent:'Mozilla iPhone'},{userAgent:'Mozilla Android'},{userAgent:'Mozilla iPad'},{platform:'MacIntel',maxTouchPoints:5},{platform:'Linux armv8l',maxTouchPoints:5},{userAgentData:{mobile:true}},{userAgentData:{platform:'Android'}}])assert.equal(isMobileDownloadClient(client),true,JSON.stringify(client));
  for(const client of [{userAgent:'Macintosh Intel Mac OS X',platform:'MacIntel',maxTouchPoints:0},{userAgent:'Windows NT 10.0',platform:'Win32',maxTouchPoints:10},{userAgent:'Linux x86_64',platform:'Linux x86_64',maxTouchPoints:0},{}])assert.equal(isMobileDownloadClient(client),false,JSON.stringify(client));
- assert.equal(new URL(typingRelease.url).hostname,'app.boxingacademy.pe.kr');assert.equal(typingRelease.bytes,31924209);
+ assert.equal(new URL(typingRelease.url).hostname,'github.com');assert.equal(typingRelease.bytes,31924209);
+});
+test('GitHub mirrors preserve the original complete offline installer and safe fallback',()=>{
+ assert.equal(windowsTrialRelease.bytes,248457211);
+ assert.equal(windowsTrialRelease.sha256,'47d16001a5d037c9ceb96e43d531e0285d655685a3656c15a521a976b7f48f26');
+ for(const release of [typingRelease,windowsTrialRelease]){
+  assert.ok(release.url.startsWith('https://github.com/sucrebae-star/boxingacademy-homepage/releases/download/typing-academy-v0.1.4-downloads/'));
+  assert.equal(new URL(release.fallbackUrl).hostname,'app.boxingacademy.pe.kr');
+  assert.ok(!release.url.includes('light-setup'));
+ }
 });

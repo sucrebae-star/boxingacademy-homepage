@@ -1,0 +1,123 @@
+{
+  "date": "2026-11-02",
+  "status": "verified-ready-for-web-deployment",
+  "appId": "kr.pe.boxingacademy.typing",
+  "version": "0.1.4",
+  "releaseUrl": "https://github.com/sucrebae-star/boxingacademy-homepage/releases/tag/typing-academy-v0.1.4-downloads",
+  "releaseId": 431299876,
+  "githubRepositoryPublic": true,
+  "githubReleasePrerelease": true,
+  "latestUserChoice": {
+    "windowsDefault": "complete-offline-installer",
+    "lightInstallerIncluded": false,
+    "meaning": "Keep the original self-contained Windows installer, not the cancelled lightweight prototype."
+  },
+  "files": [
+    {
+      "name": "TypingAcademy-0.1.4-windows-x86_64-setup.exe",
+      "platform": "windows-x86_64",
+      "variant": "offline",
+      "bytes": 248457211,
+      "sha256": "47d16001a5d037c9ceb96e43d531e0285d655685a3656c15a521a976b7f48f26",
+      "authenticodeVerified": false,
+      "physicalInstallVerified": false,
+      "url": "https://github.com/sucrebae-star/boxingacademy-homepage/releases/download/typing-academy-v0.1.4-downloads/TypingAcademy-0.1.4-windows-x86_64-setup.exe"
+    },
+    {
+      "name": "TypingAcademy-0.1.4-macOS-arm64.zip",
+      "platform": "darwin-aarch64",
+      "variant": "signed-notarized-zip",
+      "bytes": 31924209,
+      "sha256": "c4c107378231e2a06f447244384c53460cd0f7f3747fdf2fd7daa58094ac3fec",
+      "existingAppleTrustEvidenceReused": true,
+      "physicalInstallVerifiedInThisTask": false,
+      "url": "https://github.com/sucrebae-star/boxingacademy-homepage/releases/download/typing-academy-v0.1.4-downloads/TypingAcademy-0.1.4-macOS-arm64.zip"
+    }
+  ],
+  "integrity": {
+    "githubApiAssetDigests": "exact-match-for-both-original-installers",
+    "fullWindowsAnonymousHttpsGet": {
+      "http": 200,
+      "bytes": 248457211,
+      "sha256": "47d16001a5d037c9ceb96e43d531e0285d655685a3656c15a521a976b7f48f26",
+      "seconds": 31.959401,
+      "bytesPerSecond": 7774151
+    },
+    "fullMacAnonymousHttpsGet": {
+      "http": 200,
+      "bytes": 31924209,
+      "sha256": "c4c107378231e2a06f447244384c53460cd0f7f3747fdf2fd7daa58094ac3fec",
+      "seconds": 4.582145,
+      "bytesPerSecond": 6967088
+    }
+  },
+  "speedSamples": {
+    "sameMacOriginRange8MiB": {
+      "seconds": 1.042005,
+      "bytesPerSecond": 8050448
+    },
+    "githubRange8MiB": {
+      "seconds": 5.092601,
+      "bytesPerSecond": 1647214
+    },
+    "caution": "Origin host is this Mac, not an independent external Windows PC. The small-range GitHub sample was slower, so no universal speed-improvement claim is made. Full Windows transfer completed in31.96seconds; keep the original server as an explicit same-file fallback."
+  },
+  "preserved": {
+    "originalOriginInstallers": true,
+    "nativeBinary": true,
+    "macAppleSigningAndNotarization": true,
+    "windowsOfflineWebview2Runtime": true,
+    "updateServerManifestSha256": "cc9d551e4bdc57d728da903d70a7bbc1e5471d24721cce80f88b08a7d302b740",
+    "updateChannel": true,
+    "appVersion": true,
+    "memberData": true,
+    "exactParentGuideExceptPriorApprovedCorrection": true,
+    "koreanPracticeOnlyGallery": true,
+    "recordPage": true
+  },
+  "webChanges": [
+    "Both primary installer URLs now target the public GitHub Release tag with fixed versioned filenames.",
+    "Windows remains a complete offline installation package and still has the trial/publisher-signature warning.",
+    "Original-server fallback URLs are retained behind the same mobile guard; no automatic extra download.",
+    "Phone/tablet blocks primary and fallback PC installer actions; narrow touch Windows PC remains supported."
+  ],
+  "tests": {
+    "websiteUnit": 13,
+    "production": 5,
+    "assetPreservation": 3,
+    "websiteResponsive": [
+      360,
+      390,
+      768,
+      1440
+    ],
+    "mobileDownloadActionsBlocked": 7,
+    "updateScenarios": 7,
+    "existingRegressionScreens": 16,
+    "recordRouteRegression": true,
+    "nativeSourceTypeLintUnitServerBuild": "passed",
+    "nativeBrowserE2e": 11,
+    "rustTests": 9,
+    "rustCheck": "passed"
+  },
+  "limits": [
+    "No actual Windows installation/upgrade in this task.",
+    "Windows Authenticode is not verified; existing trial state retained.",
+    "Offline installation format does not mean that membership login or additional language-pack acquisition work without internet.",
+    "Cancelled light prototype stayed local and was not uploaded or published."
+  ],
+  "requestImpact": {
+    "homepageRequestsBefore": 10,
+    "homepageRequestsAfter": 10,
+    "apiRequests": 0,
+    "memberDbReads": 0,
+    "bodyBytesBefore": 1672024,
+    "bodyBytesAfter": 1673563,
+    "localSingleRunDclMsBefore": 37,
+    "localSingleRunDclMsAfter": 34,
+    "localSingleRunFcpMsBefore": 36,
+    "localSingleRunFcpMsAfter": 32,
+    "interpretation": "Added static download guidance and fallback URLs, no added requests or libraries. Single-run timings are not a performance guarantee."
+  },
+  "phase": "pre-deployment-verification-snapshot"
+}

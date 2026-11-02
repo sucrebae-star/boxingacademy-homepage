@@ -8,9 +8,9 @@
     "Typing app logo, extra spacing and two bold tool tabs; official Record link without member API reads",
     "Collaboration draft survives the new typing-tab navigation without a document reload",
     "Typing tab follows visit only on Jeonju; branch routes and existing in-memory collaboration draft still work",
-    "iphone: all five download CTAs including Windows trial blocked, PC notice, Escape/focus return, no remote download/request",
-    "android: all five download CTAs including Windows trial blocked, PC notice, Escape/focus return, no remote download/request",
-    "ipad-desktop: all five download CTAs including Windows trial blocked, PC notice, Escape/focus return, no remote download/request",
+    "iphone: all seven download CTAs including both origin fallbacks blocked, PC notice, Escape/focus return, no remote download/request",
+    "android: all seven download CTAs including both origin fallbacks blocked, PC notice, Escape/focus return, no remote download/request",
+    "ipad-desktop: all seven download CTAs including both origin fallbacks blocked, PC notice, Escape/focus return, no remote download/request",
     "Windows touch desktop at 360px remains eligible and automatically selects the Windows trial",
     "No-JS HTML contains full native guide; downloads cannot bypass device check",
     "WebKit engine: direct fold anchor and 390px layout"
@@ -47,17 +47,17 @@
       "version": "output-baseline",
       "requests": 10,
       "bodyBytes": 1572409,
-      "domContentLoadedMs": 36,
-      "fcpMs": 28,
+      "domContentLoadedMs": 33,
+      "fcpMs": 24,
       "apiRequests": 0
     },
     {
       "page": "homepage",
       "version": "output-web",
       "requests": 10,
-      "bodyBytes": 1672024,
-      "domContentLoadedMs": 37,
-      "fcpMs": 36,
+      "bodyBytes": 1673563,
+      "domContentLoadedMs": 34,
+      "fcpMs": 32,
       "apiRequests": 0
     }
   ],
