@@ -2,6 +2,8 @@
 
 기존 React 19/esbuild/Tailwind 정적 사이트와 GitHub Pages를 재사용한다. 효천본관의 ‘오시는 길’ 다음에 타이핑사관학교 탭을 추가한다. 같은 SPA에서 이동할 때 기존 문의 초안을 보존하고, 직접 접속·공유용 `typing-academy.html`은 별도의 서버 렌더 HTML/제목/OG/사이트맵을 제공한다.
 
+후속 요청: 오시는 길과 도구 탭 묶음 사이에 추가 24px 여백을 두고, 실제 회원 앱 0.1.4의 승인된 TYPING 아이콘 원본을 비율 유지 축소해 타이핑사관학교 탭에 표시한다. 타이핑사관학교·기록시스템 두 탭은 같은 800 굵기로 강조한다. 기록시스템은 기존 회원 연결 페이지가 참조하는 공식 `https://app.boxingacademy.pe.kr/record.html`로 연결하며 HTML 200을 확인했다. 회원 데이터 조회·로그인은 수행하지 않았다.
+
 ## 기존 패턴과 새 보완
 
 기존 검정·종이색·빨강/Pretendard/버튼/지점 메뉴/접기 패턴/공식 로고/호스팅/회원 앱을 재사용했다. 새로 만든 것은 소개 페이지, 부모님 안내 다중 아코디언, 컴퓨터 종류 탭, 모바일 다운로드 차단, 웹 업데이트 선택 안내이다. 다른 지점·프로그램·요금·예약·스파링클럽은 바꾸지 않는다.
@@ -28,7 +30,7 @@
 
 디자인 검사 실패 0개(사용자 요구에 따른 네이티브 아코디언 및 확정 원고의 비가시 텍스트를 오인한 eyebrow/icon-cards만 예외). 기존 브랜드 종이색·공통 서체 크기, 실제 영상이 없는 점, 지점 메뉴/기록표의 의도된 내부 가로 스크롤은 사유를 확인하고 유지했다. 사진 1개+실제 UI 3개, 섹션 진입 동작 16개, reduced-motion에서는 동작을 끈다.
 
-홈페이지 냉시작 로컬 비교: 요청 10→10회, 본문 전송 1,572,409→1,634,602B(+62,193B, 새 UI/확정 원고 코드). DOMContentLoaded/FCP의 전후 값은 검증 JSON에 함께 남겼으며 단일 로컬 측정이므로 일반 성능 보장이 아니다. API 요청 0→0, 회원/DB 조회 없음. 다운로드는 클릭 때만 시작하며 모바일은 시작하지 않는다.
+홈페이지 냉시작 로컬 비교: 요청 10→10회, 본문 전송 1,572,409→1,635,590B(+63,181B, 새 UI/확정 원고 코드). DOMContentLoaded/FCP의 전후 값은 검증 JSON에 함께 남겼으며 단일 로컬 측정이므로 일반 성능 보장이 아니다. API 요청 0→0, 회원/DB 조회 없음. 다운로드는 클릭 때만 시작하며 모바일은 시작하지 않는다.
 
 기존 오프라인 전체 화면 시험도 다시 실행해 16개 화면, 두 지점의 수업 상세/캐러셀, 메뉴/Escape/앞뒤 이동, 문의 복사·보존, 원본 6개 MP4의 오프라인 재생을 확인했다. Chromium/WebKit 엔진 시험이며 실제 Safari나 네이티브 앱 설치 시험으로 대체하지 않는다.
 
@@ -40,7 +42,7 @@
 
 새 화면·본문: `academy-source/src/components/TypingAcademy.jsx`, `WebUpdateNotice.jsx`, `academy-source/src/parent-guide.mjs`, `typing.css`, `content/parent-guide.md`.
 
-이미지: `academy-source/assets/typing/20261102/`의 `family.webp`, `family-small.webp`, `practice.webp`, `packs.webp`, `languages.webp`.
+이미지: `academy-source/assets/typing/20261102/`의 `family.webp`, `family-small.webp`, `practice.webp`, `packs.webp`, `languages.webp`, `app-icon.png`.
 
 보존·시험: `preserve-previous-assets.mjs`, `tests/preserve-assets.test.mjs`, `academy-source/tests/typing.test.mjs`, `typing-browser.mjs`, `web-update-browser.mjs`.
 

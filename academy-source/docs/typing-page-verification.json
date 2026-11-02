@@ -4,6 +4,7 @@
     "Eight native folds default closed; Enter/Space; multiple open; expand/collapse all; direct anchor opens correct fold",
     "Approved source preserved except the single user-approved factual correction",
     "Download OS tabs support arrow keys; Mac pinned verified release; Windows trial is clearly marked with remaining publisher-signature and physical-installation checks",
+    "Typing app logo, extra spacing and two bold tool tabs; official Record link without member API reads",
     "Collaboration draft survives the new typing-tab navigation without a document reload",
     "Typing tab follows visit only on Jeonju; branch routes and existing in-memory collaboration draft still work",
     "iphone: all five download CTAs including Windows trial blocked, PC notice, Escape/focus return, no remote download/request",
@@ -46,16 +47,16 @@
       "requests": 10,
       "bodyBytes": 1572409,
       "domContentLoadedMs": 34,
-      "fcpMs": 32,
+      "fcpMs": 36,
       "apiRequests": 0
     },
     {
       "page": "homepage",
       "version": "output-web",
       "requests": 10,
-      "bodyBytes": 1634602,
-      "domContentLoadedMs": 34,
-      "fcpMs": 36,
+      "bodyBytes": 1635590,
+      "domContentLoadedMs": 38,
+      "fcpMs": 40,
       "apiRequests": 0
     }
   ],
