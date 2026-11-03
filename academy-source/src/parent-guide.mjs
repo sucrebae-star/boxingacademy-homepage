@@ -23,17 +23,17 @@ export function parseParentGuide(raw) {
 }
 
 export const typingRelease = Object.freeze({
-  version: '0.1.7', platform: 'macOS · Apple Silicon (M1 이상)', bytes: 31965413,
-  url: 'https://github.com/sucrebae-star/boxingacademy-homepage/releases/download/typing-academy-v0.1.7-downloads/TypingAcademy-0.1.7-macOS-arm64.zip',
-  fallbackUrl: 'https://app.boxingacademy.pe.kr/assets/typing-academy/releases/0.1.7/TypingAcademy-0.1.7-macOS-arm64.zip',
-  sha256: '9ffe0db999088f21f83ae6f16f9988b03d22ccb399f66ecd37354912cf35e46a',
+  version: '0.1.8', platform: 'macOS · Apple Silicon (M1 이상)', bytes: 32163875,
+  url: 'https://github.com/sucrebae-star/boxingacademy-homepage/releases/download/typing-academy-v0.1.8-downloads/TypingAcademy-0.1.8-macOS-arm64.zip',
+  fallbackUrl: 'https://app.boxingacademy.pe.kr/assets/typing-academy/releases/0.1.8/TypingAcademy-0.1.8-macOS-arm64.zip',
+  sha256: '9a2334605cf42a93ce9abd8c4b2a78683952cf777e64f0afb18986706e7d1cde',
 });
 
 export const windowsTrialRelease = Object.freeze({
-  version:'0.1.7', bytes:248495010,
-  url:'https://github.com/sucrebae-star/boxingacademy-homepage/releases/download/typing-academy-v0.1.7-downloads/TypingAcademy-0.1.7-windows-x86_64-setup.exe',
-  fallbackUrl:'https://app.boxingacademy.pe.kr/assets/typing-academy/releases/0.1.7/TypingAcademy-0.1.7-windows-x86_64-setup.exe',
-  sha256:'44af27be219e1890a26d433297349f6fdeb544498cd5417aa45494390cb7649b',
+  version:'0.1.8', bytes:248678385,
+  url:'https://github.com/sucrebae-star/boxingacademy-homepage/releases/download/typing-academy-v0.1.8-downloads/TypingAcademy-0.1.8-windows-x86_64-setup.exe',
+  fallbackUrl:'https://app.boxingacademy.pe.kr/assets/typing-academy/releases/0.1.8/TypingAcademy-0.1.8-windows-x86_64-setup.exe',
+  sha256:'4abe117bec0bba6aecd427052fea5c4abcc5f446b3de2f78d1f64deb3520125c',
 });
 
 export function isMobileDownloadClient(client = {}) {
