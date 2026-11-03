@@ -1,0 +1,168 @@
+{
+  "version": "1.0.0",
+  "approved": "2026-11-03",
+  "caption": "실제 수업 구도를 참고한 AI 재구성 이미지",
+  "engine": "built-in ImageGen; internal model unavailable",
+  "assets": [
+    {
+      "id": "kids-01",
+      "path": "assets/jeonju/class-20261103/kids-01-web.webp",
+      "width": 1280,
+      "height": 721,
+      "bytes": 166704,
+      "sha256": "44f13a107297697718a5b826e7efa4ee815b06be9aae5390c93ee835948a1cf3"
+    },
+    {
+      "id": "kids-01",
+      "path": "assets/jeonju/class-20261103/kids-01-mobile.webp",
+      "width": 640,
+      "height": 361,
+      "bytes": 59242,
+      "sha256": "677aeb400d785b967aefcf829b7ea9dba434543242f41af72a80b3cbd85b31b9"
+    },
+    {
+      "id": "kids-02",
+      "path": "assets/jeonju/05-kids-web.webp",
+      "width": 1280,
+      "height": 721,
+      "bytes": 172236,
+      "sha256": "ea347280e930529a562eb7814598a1f271c5a0f05a09862b0b8b51209e86a496"
+    },
+    {
+      "id": "kids-02",
+      "path": "assets/jeonju/05-kids-mobile.webp",
+      "width": 640,
+      "height": 361,
+      "bytes": 62598,
+      "sha256": "18f39e2ab1b3170118e83ab69d3a02d596fe73fb748fa12d65a6fca77ec4df1c"
+    },
+    {
+      "id": "kids-03",
+      "path": "assets/jeonju/class-20261103/kids-03-web.webp",
+      "width": 1280,
+      "height": 721,
+      "bytes": 197266,
+      "sha256": "1e591d973e5b3db2ae1caa67244aa4e2d19e8f20e5b85e214c87ed84178d2d4f"
+    },
+    {
+      "id": "kids-03",
+      "path": "assets/jeonju/class-20261103/kids-03-mobile.webp",
+      "width": 640,
+      "height": 361,
+      "bytes": 68298,
+      "sha256": "cdf8c7ef98705b93d5d51fdb662a5704645c673e2ba23172215724d3d21b4652"
+    },
+    {
+      "id": "boxing-01",
+      "path": "assets/jeonju/class-20261103/boxing-01-web.webp",
+      "width": 1280,
+      "height": 721,
+      "bytes": 184278,
+      "sha256": "d68103340eb9bb730f87c5acd0baf0bf96a703ccfae6f12220cddbc6c984aeb8"
+    },
+    {
+      "id": "boxing-01",
+      "path": "assets/jeonju/class-20261103/boxing-01-mobile.webp",
+      "width": 640,
+      "height": 361,
+      "bytes": 60916,
+      "sha256": "37d070d3007f87a6d048555be255254347dad1fea636d0327461d49f1373034b"
+    },
+    {
+      "id": "boxing-02",
+      "path": "assets/jeonju/01-hero-web.webp",
+      "width": 1280,
+      "height": 721,
+      "bytes": 174642,
+      "sha256": "2a337d58aa03e64e5a4d6c696a9454364020daf627b0878eb09b7a09025594cf"
+    },
+    {
+      "id": "boxing-02",
+      "path": "assets/jeonju/01-hero-mobile.webp",
+      "width": 640,
+      "height": 361,
+      "bytes": 58854,
+      "sha256": "c93fb99b650d1af4c460ff97780feeb2a3b2194cdff27f9b37634bfd601b288d"
+    },
+    {
+      "id": "boxing-03",
+      "path": "assets/jeonju/04-boxing-web.webp",
+      "width": 1280,
+      "height": 721,
+      "bytes": 168320,
+      "sha256": "a6ead6f0acf5ca795014f49da719ed2569a488322103c10c419022a1573de1c9"
+    },
+    {
+      "id": "boxing-03",
+      "path": "assets/jeonju/04-boxing-mobile.webp",
+      "width": 640,
+      "height": 361,
+      "bytes": 57954,
+      "sha256": "047927e91a91285be0aa71d266bdb67fd8f7e3b93f57a3b26765d1d8a834fc87"
+    },
+    {
+      "id": "boxing-04",
+      "path": "assets/jeonju/class-20261103/boxing-04-web.webp",
+      "width": 941,
+      "height": 1672,
+      "bytes": 325480,
+      "sha256": "730fd6fd49b8331381a6c66dc5a49df04d40cd04eb0ff8fbd4629184c472180f"
+    },
+    {
+      "id": "boxing-04",
+      "path": "assets/jeonju/class-20261103/boxing-04-mobile.webp",
+      "width": 640,
+      "height": 1138,
+      "bytes": 162444,
+      "sha256": "ce421ddc3d53f97b4b877daa484f9c5834d415ebd91b37470f10d0227e769190"
+    },
+    {
+      "id": "crossfit-01",
+      "path": "assets/jeonju/03-physical-web.webp",
+      "width": 1280,
+      "height": 721,
+      "bytes": 191328,
+      "sha256": "ba8c804aecd7385d905a042eb7aa5a0817765878f3a6f9e4fe1549edf00866f8"
+    },
+    {
+      "id": "crossfit-01",
+      "path": "assets/jeonju/03-physical-mobile.webp",
+      "width": 640,
+      "height": 361,
+      "bytes": 61768,
+      "sha256": "49f67e82337593acf31208ac6776336ee0cfe97a9fa126cff65f4effe82e09e0"
+    },
+    {
+      "id": "crossfit-02",
+      "path": "assets/jeonju/06-morning-web.webp",
+      "width": 1280,
+      "height": 721,
+      "bytes": 190170,
+      "sha256": "4218d6ee081d0a21726670796b9b9a87b2b38edc31e292de5b4d645282bcd3fa"
+    },
+    {
+      "id": "crossfit-02",
+      "path": "assets/jeonju/06-morning-mobile.webp",
+      "width": 640,
+      "height": 361,
+      "bytes": 59566,
+      "sha256": "0740ba625fc1d418cfc82778cd488f0b0665cdc3cf47fd5d52d0747be194da7d"
+    },
+    {
+      "id": "crossfit-03",
+      "path": "assets/jeonju/class-20261103/crossfit-03-web.webp",
+      "width": 1280,
+      "height": 721,
+      "bytes": 173870,
+      "sha256": "198108ca13a2229ff50e1824dccc730cb473178bb91c265804ebb12a90299db4"
+    },
+    {
+      "id": "crossfit-03",
+      "path": "assets/jeonju/class-20261103/crossfit-03-mobile.webp",
+      "width": 640,
+      "height": 361,
+      "bytes": 57278,
+      "sha256": "764a00921776d60b6a1cfadccc1e0586163d7ac1dacdec03ccc97737cd0583e3"
+    }
+  ]
+}

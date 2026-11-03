@@ -1,3 +1,4 @@
+import {classPhotos,coursePhotoIds,reconstructionCaption} from './jeonju-class-photos.mjs';
 // Generated concept photographs, not photographs of actual members or facilities.
 const parts = (rows) => rows.map(([file, title, description]) => ({
   image: `assets/curriculum/${file}.webp`, title, description,
@@ -60,4 +61,12 @@ for (const [id, stem] of Object.entries(videoPrograms)) {
 for (const part of curricula['physical-training'].parts) {
   if (part.title === '헤비백 타격') part.photoScene = 'heavy-bag';
   if (part.title === '서킷트레이닝') part.photoScene = 'circuit';
+}
+
+// Keep the original two real videos first and retain every existing exercise photo.
+for (const [program,ids] of Object.entries(coursePhotoIds)) {
+  curricula[program].parts.splice(2,0,...ids.map(id=>({
+    reconstructedPhoto:id,image:classPhotos[id].scene+'-web.webp',title:classPhotos[id].title,
+    description:reconstructionCaption+'. 인물·시설 세부는 실제 촬영 기록과 다를 수 있습니다.',
+  })));
 }

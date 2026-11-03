@@ -26,3 +26,7 @@ footer{background:var(--ink);color:var(--paper);padding-block:64px 30px}.footer-
 .carousel-hint{margin:0 0 12px}
 
 @media(max-width:700px){.detail-program-switch{flex-wrap:nowrap;overflow-x:auto;padding-bottom:5px;scrollbar-width:thin}.detail-program-switch button{flex-shrink:0;white-space:nowrap}}
+
+/* The new full-class compositions must not crop faces at any breakpoint. */
+#jeonju .branch-hero .photo.class-photo img,#jeonju .program .photo.class-photo img,#jeonju .schedule-intro .photo.class-photo img{aspect-ratio:16/9;object-fit:contain;object-position:center}
+#home .photo.class-photo img{object-fit:contain;object-position:center}

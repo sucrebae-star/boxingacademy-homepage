@@ -1,11 +1,20 @@
 import React, {useCallback, useEffect, useId, useRef, useState} from 'react';
+import {classPhotos,reconstructionCaption} from '../jeonju-class-photos.mjs';
 
 const assets = () => globalThis.__ASSETS__ || {};
 const media = path => assets()[path] || path;
 const reducedMotion = () => typeof matchMedia === 'function'
   && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-function ExercisePhoto({part}) {
+function ExercisePhoto({part,nearby=true}) {
+  if (part.reconstructedPhoto) {
+    if (!nearby) return <div className="photo class-photo" aria-hidden="true" style={{aspectRatio:'16 / 9',background:'var(--ink)'}}/>;
+    const photo=classPhotos[part.reconstructedPhoto];
+    return <picture className="photo class-photo">
+      <source media="(max-width:700px)" srcSet={media(`${photo.scene}-mobile.webp`)} width={photo.mobileWidth} height={photo.mobileHeight}/>
+      <img src={media(`${photo.scene}-web.webp`)} width={photo.width} height={photo.height} loading="lazy" decoding="async" alt={`${photo.title} · ${reconstructionCaption}`}/>
+    </picture>;
+  }
   if (part.scene) {
     return <picture className="photo">
       <img src={media(`${part.scene}-web.webp`)} width="1672" height="941" loading="lazy" decoding="async" alt={`${part.title} 운동을 표현한 AI 콘셉트 사진`}/>
@@ -191,7 +200,7 @@ export default function LessonCarousel({parts, program, title}) {
           {parts.map((part, i) => <figure className="slide" key={`${program}-${i}`} aria-hidden={i !== index} inert={i !== index} role="group" aria-roledescription="슬라이드" aria-label={`${i + 1} / ${parts.length}: ${part.title}`}>
             {part.video && i === index && !moving && assets()[part.video]
               ? <ClassVideo key={`${program}-${i}`} part={part}/>
-              : <ExercisePhoto part={part}/>}
+              : <ExercisePhoto part={part} nearby={Math.abs(i-index)<=1}/>}
           </figure>)}
         </div>
         <div className="carousel-bottom">

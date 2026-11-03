@@ -18,7 +18,8 @@ test('the video edition includes exactly the six original class videos',()=>{
 });
 test('branch data keeps pricing, phone and reservation destinations independent',()=>{
  assert.equal(branches.yeoksam.phone,'0507-1494-2783');assert.equal(branches.jeonju.phone,'063-717-6433');assert.notEqual(branches.yeoksam.booking,branches.jeonju.booking);assert.ok(branches.yeoksam.booking.includes('2024734294'));assert.ok(branches.jeonju.booking.includes('752726'));assert.ok(branches.yeoksam.prices.some(r=>r.includes('전화 문의')));assert.ok(branches.jeonju.prices.some(r=>r.includes('200,000원')));
- assert.equal(Object.values(lessons).flatMap(p=>p.parts).filter(p=>!p.video).length,17);
+ assert.equal(Object.values(lessons).flatMap(p=>p.parts).filter(p=>!p.video&&!p.reconstructedPhoto).length,17);
+ assert.equal(Object.values(lessons).flatMap(p=>p.parts).filter(p=>p.reconstructedPhoto).length,10);
 });
 test('all new Yeoksam scenes have independently composed mobile and desktop assets',()=>{
  for(const scene of ['hero','mitt','bag','conditioning'])for(const mode of ['web','mobile'])assert.ok(existsSync(`assets/yeoksam/${scene}-${mode}.webp`));
