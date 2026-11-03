@@ -24,13 +24,13 @@ test('typing-only anchors do not leak the route onto another branch',()=>{
 test('phone and tablet downloads are denied without treating a narrow desktop as a phone',()=>{
  for(const client of [{userAgent:'Mozilla iPhone'},{userAgent:'Mozilla Android'},{userAgent:'Mozilla iPad'},{platform:'MacIntel',maxTouchPoints:5},{platform:'Linux armv8l',maxTouchPoints:5},{userAgentData:{mobile:true}},{userAgentData:{platform:'Android'}}])assert.equal(isMobileDownloadClient(client),true,JSON.stringify(client));
  for(const client of [{userAgent:'Macintosh Intel Mac OS X',platform:'MacIntel',maxTouchPoints:0},{userAgent:'Windows NT 10.0',platform:'Win32',maxTouchPoints:10},{userAgent:'Linux x86_64',platform:'Linux x86_64',maxTouchPoints:0},{}])assert.equal(isMobileDownloadClient(client),false,JSON.stringify(client));
- assert.equal(new URL(typingRelease.url).hostname,'github.com');assert.equal(typingRelease.bytes,31963264);
+ assert.equal(new URL(typingRelease.url).hostname,'github.com');assert.equal(typingRelease.bytes,31965413);
 });
 test('GitHub mirrors preserve the original complete offline installer and safe fallback',()=>{
- assert.equal(windowsTrialRelease.bytes,248494427);
- assert.equal(windowsTrialRelease.sha256,'30c3d88ee6ab27fbd529a2d6af361c9007809d4cffc43e236f95581dd7561174');
+ assert.equal(windowsTrialRelease.bytes,248495010);
+ assert.equal(windowsTrialRelease.sha256,'44af27be219e1890a26d433297349f6fdeb544498cd5417aa45494390cb7649b');
  for(const release of [typingRelease,windowsTrialRelease]){
-  assert.ok(release.url.startsWith('https://github.com/sucrebae-star/boxingacademy-homepage/releases/download/typing-academy-v0.1.6-downloads/'));
+  assert.ok(release.url.startsWith('https://github.com/sucrebae-star/boxingacademy-homepage/releases/download/typing-academy-v0.1.7-downloads/'));
   assert.equal(new URL(release.fallbackUrl).hostname,'app.boxingacademy.pe.kr');
   assert.ok(!release.url.includes('light-setup'));
  }
