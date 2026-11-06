@@ -1,4 +1,4 @@
-import {readFile,writeFile,mkdir,readdir,cp} from 'node:fs/promises';
+import {readFile,writeFile,mkdir,readdir,cp,unlink} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
@@ -31,9 +31,15 @@ const notices=(await readFile('THIRD-PARTY-NOTICES.txt','utf8')).replaceAll('</s
 const esc=s=>s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fallback=Object.entries(branches).map(([id,b])=>`<section style="padding:40px"><h2>${esc(b.official)}</h2><p>${esc(b.description)}</p><p>${esc(b.address)} / ${esc(b.phone)}</p><h3>운영시간</h3>${b.hours.map(row=>`<p>${row.map(esc).join(' · ')}</p>`).join('')}<h3>이용요금</h3>${b.prices.map(row=>`<p>${row.map(esc).join(' · ')}</p>`).join('')}<p><a href="${b.booking}" target="_blank" rel="noopener noreferrer">상담예약 (인터넷 필요)</a></p></section>`).join('');
 if(production){
+ // The Pages workflow seeds this directory with the old public shell.
+ const legacyClubPage=path.join(output,'club.html');
+ try {
+  const legacyHtml=await readFile(legacyClubPage,'utf8');
+  if(!legacyHtml.includes('<title>스파링클럽으로 이동</title>')||!legacyHtml.includes('https://sparringclub.kr/club.html'))throw Error('Unexpected preexisting club.html in the production output');
+  await unlink(legacyClubPage);
+ }catch(error){if(error.code!=='ENOENT')throw error;}
  const origin='https://xn--zb0bzfz85bysd8qd313b.com';
- const routing=`const clubHashes=['dashboard','players','gyms','board','record','post-detail','admin-dashboard'];
-const hash=location.hash.slice(1);if(new URLSearchParams(location.search).has('postId')||clubHashes.includes(hash)||hash.startsWith('modal-'))location.replace('https://sparringclub.kr/club.html'+location.search+location.hash);
+ const routing=`const hash=location.hash.slice(1);
 const academyAliases={about:'about',programs:'programs',schedule:'guide',space:'visit',guide:'guide',reservation:'visit',pricing:'pricing'};
 if(academyAliases[hash])history.replaceState(null,'',location.pathname+location.search+'#jeonju/'+academyAliases[hash]);
 if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));`;
@@ -58,10 +64,9 @@ if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serv
  const recordHtml=html.replaceAll(title,recordTitle).replaceAll(description,recordDescription).replace(`rel="canonical" href="${origin}/"`,`rel="canonical" href="${origin}/record-system.html"`).replace(`property="og:url" content="${origin}/"`,`property="og:url" content="${origin}/record-system.html"`).replace(hero,new URL(data['assets/record-system/20261102/promo-og.jpg'],origin+'/').href).replace(`<div id="root">${markup}</div>`,`<div id="root">${render(recordRoute)}</div>`).replace(`globalThis.__SITE_MODE__='production';`,`globalThis.__SITE_MODE__='production';globalThis.__INITIAL_ROUTE__=${JSON.stringify(recordRoute)};`).replace(`<noscript><div class="shell"><p>자바스크립트가 꺼져 있어 전체 지점 정보를 아래에 표시합니다.</p>${fallback}</div></noscript>`,`<noscript><p class="shell">자바스크립트가 꺼져 있습니다. 공식 스토어 설치 링크와 안내는 이용할 수 있으며, 화면 탭과 확대 기능은 JavaScript를 켠 브라우저에서 지원합니다.</p></noscript>`);
  await writeFile(path.join(output,'record-system.html'),recordHtml);
  await writeFile(path.join(output,'CNAME'),new URL(origin).hostname+'\n');
- await writeFile(path.join(output,'robots.txt'),`User-agent: *\nAllow: /\nDisallow: /club.html\nSitemap: ${origin}/sitemap.xml\n`);
+ await writeFile(path.join(output,'robots.txt'),`User-agent: *\nAllow: /\nSitemap: ${origin}/sitemap.xml\n`);
  await writeFile(path.join(output,'sitemap.xml'),`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${origin}/</loc></url><url><loc>${origin}/typing-academy.html</loc></url><url><loc>${origin}/record-system.html</loc></url></urlset>\n`);
  await writeFile(path.join(output,'manifest.json'),JSON.stringify({name:'복싱사관학교',short_name:'복싱사관학교',start_url:'./',scope:'./',display:'standalone',background_color:'#171A1B',theme_color:'#171A1B',icons:[{src:data['assets/icon-192.png'],sizes:'192x192',type:'image/png',purpose:'any'},{src:data['assets/icon-512.png'],sizes:'512x512',type:'image/png',purpose:'any'}]},null,2));
- await writeFile(path.join(output,'club.html'),`<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="refresh" content="0;url=https://sparringclub.kr/club.html"><title>스파링클럽으로 이동</title></head><body><a href="https://sparringclub.kr/club.html">스파링클럽 열기</a><script>location.replace('https://sparringclub.kr/club.html'+location.search+location.hash);</script></body></html>`);
  const precache=['index.html','manifest.json',cssName,appName,routeName,data['assets/logo.png'],data['assets/icon-192.png'],data['assets/icon-512.png'],data['assets/pretendard-variable.woff2']];
  const worker=`const CACHE='boxingacademy-v2-${version}',FILES=${JSON.stringify(precache)};const base=new URL('./',self.location.href);const urls=FILES.map(p=>new URL(p,base).href);
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(urls)).then(()=>self.skipWaiting())));

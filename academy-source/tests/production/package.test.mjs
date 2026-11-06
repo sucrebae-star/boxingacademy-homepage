@@ -47,22 +47,22 @@ test('Record brochure shares the shell without mounting hidden homepage media',(
  assert.ok(manifest.assets.some(x=>x.type==='image/svg+xml'));
  assert.ok(manifest.assets.some(x=>x.type==='image/jpeg'));
 });
-test('new and legacy links retain the correct academy or club destination',()=>{
+test('official academy routes stay on the academy site and retain booking links',()=>{
  const routeName=html.match(/src="(academy-v2-routing\.[^"]+)"/)[1];
  const routing=read(routeName);
  for(const [search,hash,wantedClub,wantedHash] of [
-  ['?postId=9','#board','https://sparringclub.kr/club.html?postId=9#board',undefined],
-  ['','#players','https://sparringclub.kr/club.html#players',undefined],
+  ['?postId=9','#board',undefined,undefined],
+  ['','#players',undefined,undefined],
   ['','#programs',undefined,'/#jeonju/programs'],
   ['','#reservation',undefined,'/#jeonju/visit'],
   ['','#yeoksam/programs',undefined,undefined],
   ['','#home',undefined,undefined]
  ]){let club,rewritten;vm.runInNewContext(routing,{location:{search,hash,pathname:'/',replace:v=>club=v},history:{replaceState:(a,b,v)=>rewritten=v},navigator:{},URLSearchParams});assert.equal(club,wantedClub);assert.equal(rewritten,wantedHash);}
- assert.ok(html.includes('https://sparringclub.kr/club.html'));
+ assert.ok(!html.includes('sparringclub.kr'));
+ assert.ok(!routing.includes('sparringclub.kr'));
  assert.ok(html.includes('https://booking.kakao.com/detail/ticket/752726'));
  assert.ok(html.includes('https://m.place.naver.com/place/2024734294/ticket'));
- assert.ok(read('club.html').includes("location.search+location.hash"));
- assert.ok(!read('club.html').includes('firebase'));
+ assert.ok(!existsSync(path.join(output,'club.html')));
 });
 test('worker caches homepage shell only and removes only superseded academy caches',async()=>{
  const callbacks={};let cached;const deleted=[];
