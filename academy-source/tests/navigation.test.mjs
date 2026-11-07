@@ -13,3 +13,11 @@ test('branch section links cannot cross routes or navigate to arbitrary element 
   assert.deepEqual(parseRoute('#jeonju/unknown'), {page:'jeonju',section:null});
   assert.deepEqual(parseRoute('#home'), {page:'home',section:null});
 });
+test('the philosophy board and article belong to the Jeonju branch', () => {
+  assert.deepEqual(parseRoute('#jeonju/philosophy'), {page:'jeonju',section:'philosophy'});
+  assert.deepEqual(parseRoute('#jeonju/philosophy/greetings-and-respect'), {
+    page:'jeonju', section:'philosophy', article:'greetings-and-respect'
+  });
+  assert.deepEqual(parseRoute('#jeonju/philosophy/greetings-and-respect/extra'), {page:'jeonju',section:'philosophy'});
+  assert.deepEqual(parseRoute('#yeoksam/philosophy'), {page:'yeoksam',section:null});
+});

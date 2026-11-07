@@ -30,3 +30,41 @@ footer{background:var(--ink);color:var(--paper);padding-block:64px 30px}.footer-
 /* The new full-class compositions must not crop faces at any breakpoint. */
 #jeonju .branch-hero .photo.class-photo img,#jeonju .program .photo.class-photo img,#jeonju .schedule-intro .photo.class-photo img{aspect-ratio:16/9;object-fit:contain;object-position:center}
 #home .photo.class-photo img{object-fit:contain;object-position:center}
+
+/* The philosophy board shares the branch header, navigation and typography. */
+.branch-subnav a[href="#jeonju/philosophy"][aria-current="page"] {
+  text-decoration-color: var(--red);
+  text-decoration-thickness: 2px;
+}
+.philosophy > h1 {margin: 10px 0 36px;}
+.philosophy-empty {border-top: 1px solid var(--tone); padding: 26px 0; color: var(--muted);}
+.philosophy-feature {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 48px;
+  align-items: center;
+  border-block: 1px solid var(--tone);
+  padding-block: 28px;
+}
+.philosophy-feature h2 {margin-block: 10px 16px;}
+.philosophy-date {display: block; color: var(--muted); font-size: 14px; margin-top: 12px;}
+.philosophy-feature .button {margin-top: 20px;}
+.philosophy figure {margin: 0;}
+.philosophy figure img {display: block; max-width: 100%; height: auto;}
+.philosophy figcaption {margin-top: 8px; color: var(--muted); font-size: 14px;}
+.philosophy-list {margin-top: 44px;}
+.philosophy-grid {display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px;}
+.philosophy-grid article {padding-top: 16px; border-top: 1px solid var(--tone);}
+.philosophy-grid h3 a {text-decoration: underline; text-underline-offset: 4px;}
+.philosophy-article {max-width: 760px; margin-inline: auto;}
+.philosophy-article h1 {font-size: clamp(32px, 5vw, 62px); margin-block: 0 20px;}
+.philosophy-author {margin: 0;}
+.philosophy-back {display: inline-block; margin-block: 14px; text-decoration: underline;}
+.philosophy-body {margin-block: 34px; white-space: pre-line;}
+.philosophy-body > * + * {margin-top: 24px;}
+.philosophy-body h2 {font-size: clamp(23px, 3.6vw, 34px); margin-top: 44px;}
+.philosophy-place {border-block: 1px solid var(--tone); padding-block: 16px;}
+.philosophy-place a {font-weight: 650; text-decoration: underline; text-underline-offset: 4px;}
+@media (max-width: 700px) {
+  .philosophy-feature, .philosophy-grid {grid-template-columns: 1fr; gap: 22px;}
+}
