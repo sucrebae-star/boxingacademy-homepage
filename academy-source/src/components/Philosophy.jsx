@@ -17,6 +17,7 @@ function PostImage({image, assets, caption}) {
 
 function PostBlock({block, assets}) {
   if (block.type === 'image') return <PostImage image={block} assets={assets} caption/>;
+  if (block.type === 'links') return <p className="philosophy-place">{block.items.map((item, i) => <React.Fragment key={item.href}>{i > 0 && ' · '}<a href={item.href} target="_blank" rel="noopener noreferrer">{item.label}</a></React.Fragment>)}</p>;
   if (block.type === 'heading') return <h2>{block.text}</h2>;
   if (block.type === 'place') return <p className="philosophy-place">
     <a href={block.href} target="_blank" rel="noopener noreferrer">{block.text} ↗</a>
@@ -42,7 +43,7 @@ export default function Philosophy({article, assets}) {
       <div className="philosophy-body">
         {post.blocks.map((block, index) => <PostBlock key={index} block={block} assets={assets}/>)}
       </div>
-      <a className="text-link" href={post.source} target="_blank" rel="noopener noreferrer">블로그 원문 보기 ↗</a>
+      {post.source && <a className="text-link" href={post.source} target="_blank" rel="noopener noreferrer">블로그 원문 보기 ↗</a>}
     </article> : <>
       <h1>지도 철학</h1>
       {article && <p role="status" className="quiet">요청한 글을 찾을 수 없습니다.</p>}
