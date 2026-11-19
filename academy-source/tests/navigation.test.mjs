@@ -21,3 +21,8 @@ test('the philosophy board and article belong to the Jeonju branch', () => {
   assert.deepEqual(parseRoute('#jeonju/philosophy/greetings-and-respect/extra'), {page:'jeonju',section:'philosophy'});
   assert.deepEqual(parseRoute('#yeoksam/philosophy'), {page:'yeoksam',section:null});
 });
+
+test('the Jeonju events link belongs to Jeonju only', () => {
+  assert.deepEqual(parseRoute('#jeonju/events'), {page:'jeonju',section:'events'});
+  assert.deepEqual(parseRoute('#yeoksam/events'), {page:'yeoksam',section:null});
+});
