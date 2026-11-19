@@ -12,7 +12,23 @@ const isProduction=globalThis.__SITE_MODE__==='production';
 const A=globalThis.__ASSETS__||{};
 const media=p=>A[p]||p;
 const arrow=<span aria-hidden="true">↗</span>;
-function Picture({scene,alt,priority=false,className=''}){const photo=classPhotoForScene(scene);return <picture className={`photo ${className}${photo?' class-photo':''}`}><source media="(max-width:700px)" srcSet={media(scene+'-mobile.webp')} width={photo?.mobileWidth||1122} height={photo?.mobileHeight||1402}/><img src={media(scene+'-web.webp')} alt={photo?`${photo.title} · ${reconstructionCaption}`:alt} width={photo?.width||1672} height={photo?.height||941} loading={priority?'eager':'lazy'} fetchPriority={priority?'high':undefined} decoding="async"/></picture>}
+const refreshScenes = {
+ hero: 'assets/jeonju/refresh-20261119/group-boxing',
+ kids: 'assets/jeonju/refresh-20261119/kids-group',
+ passes: 'assets/jeonju/refresh-20261119/pass-guide',
+};
+const refreshPhotos = {
+ [refreshScenes.hero]: {title:'여러 수강생이 함께 헤비백 기본 동작을 연습하는 장면',width:1280,height:720,mobileWidth:720,mobileHeight:405},
+ [refreshScenes.kids]: {title:'코치와 함께 가드 자세를 연습하는 키즈복싱 수업',caption:'키즈복싱 AI 콘셉트 이미지',width:1280,height:720,mobileWidth:720,mobileHeight:405},
+ [refreshScenes.passes]: {title:'피지컬 그룹 수업을 함께한 수강생들',width:1280,height:720,mobileWidth:720,mobileHeight:405},
+};
+const recordService = 'https://app.boxingacademy.pe.kr/record';
+const jeonjuEvents = [
+ {title:'30일 다이어트 챌린지',description:'인바디 측정으로 시작해 식사와 체중을 기록합니다. 기록시스템의 영양가이드에서 확인하세요.',href:recordService,action:'참여 방법 확인'},
+ {title:'친구 소개',description:'친구에게 체험 안내를 공유하고 기록시스템의 나의 프로필에서 추천 현황을 확인하세요.',href:recordService,action:'추천 현황 확인'},
+ {title:'우리 아이 첫 타자',description:'Windows PC나 Mac에서 웹으로 연습하고 첫 타자 기록을 남겨보세요.',href:'typing-academy.html',action:'타이핑사관학교 안내'},
+];
+function Picture({scene,alt,priority=false,className=''}){const refresh=refreshPhotos[scene];const photo=classPhotoForScene(scene)||refresh;return <picture className={`photo ${className}${photo?' class-photo':''}`}><source media={refresh?"(max-width:1000px)":"(max-width:700px)"} srcSet={media(scene+'-mobile.webp')} width={photo?.mobileWidth||1122} height={photo?.mobileHeight||1402}/><img src={media(scene+'-web.webp')} alt={photo?`${photo.title} · ${photo.caption||reconstructionCaption}`:alt} width={photo?.width||1672} height={photo?.height||941} loading={priority?'eager':'lazy'} fetchPriority={priority?'high':undefined} decoding="async"/></picture>}
 function Logo(){return <svg className="logo" viewBox="420 680 1680 1140" role="img" aria-label="복싱사관학교 공식 로고"><image href={media('assets/logo.png')} width="2500" height="2500"/></svg>}
 function External({href,children,className='',...rest}){return <a className={className} href={href} target="_blank" rel="noopener noreferrer" {...rest}>{children} {arrow}<span className="sr-only"> (외부 연결 · 인터넷 필요)</span></a>}
 function Header({page}) {
@@ -36,13 +52,55 @@ function Home() {
 function BranchNav({id,typing=false,record=false,philosophy=false}) {
  const b=branches[id];
  const nav=useRef(null);
- const sections=[['about','지점 소개'],...(id==='jeonju'?[['philosophy','지도 철학']]:[]),['programs','프로그램'],['pricing','이용요금'],['guide',id==='jeonju'?'수업·시간표':'수업·이용안내'],['visit','오시는 길']];
+ const sections=[['about','지점 소개'],...(id==='jeonju'?[['philosophy','지도 철학']]:[]),['programs','프로그램'],['pricing','이용요금'],...(id==='jeonju'?[['events','이벤트']]:[]),['guide',id==='jeonju'?'수업·시간표':'수업·이용안내'],['visit','오시는 길']];
  useEffect(()=>{if(typing||record)nav.current?.querySelector('.branch-tools')?.scrollIntoView({block:'nearest',inline:'end',behavior:'instant'})},[typing,record]);
  return <div className="branch-subnav"><nav ref={nav} className="shell" aria-label={b.name+' 섹션 메뉴'}>{sections.map(([target,label])=><a key={target} href={`#${id}/${target}`} aria-current={philosophy&&target==='philosophy'?'page':undefined}>{label}</a>)}{id==='jeonju'&&<div className="branch-tools"><a className="branch-tool-link" href={typing?'#jeonju/typing':'typing-academy.html'} aria-current={typing?'page':undefined} onClick={e=>{if(!typing&&!e.metaKey&&!e.ctrlKey&&!e.shiftKey&&e.button===0){e.preventDefault();location.hash='jeonju/typing'}}}><img className="branch-tool-logo" src={media('assets/typing/20261102/app-icon.png')} width="128" height="128" alt="" aria-hidden="true"/><span>타이핑사관학교</span></a><a className="branch-tool-link" href={record?'#jeonju/record':'record-system.html'} aria-current={record?'page':undefined} onClick={e=>{if(!record&&!e.metaKey&&!e.ctrlKey&&!e.shiftKey&&e.button===0){e.preventDefault();location.hash='jeonju/record'}}}>기록시스템</a></div>}<External href={b.booking} className="subnav-booking">상담예약</External></nav></div>
 }
 function SectionHeading({label,title,children}){return <div className="section-top"><div><h2 data-reveal="rise">{title}</h2></div>{children&&<p data-reveal="rise">{children}</p>}</div>}
+function PriceList({prices}) {
+ return <div className="price-list">{prices.map(([title,price,desc])=><div className="price-row" key={title} data-reveal="rise">
+  <h3>{title}</h3><p>{desc}</p><strong>{price}</strong>
+ </div>)}</div>;
+}
+
+function JeonjuPasses({branch}) {
+ return <section className="prices jeonju-passes shell section-pad" id="jeonju-pricing">
+  <SectionHeading title="이용요금">이용 기간과 총액을 확인하세요.</SectionHeading>
+  <div className="jeonju-passes-layout">
+   <div>
+    <PriceList prices={branch.prices}/>
+    <p className="price-note">3개월권 금액은 전체 이용 기간의 총액입니다. 등록 전 이용 조건과 추가 옵션을 확인해 주세요.</p>
+   </div>
+   <div className="jeonju-enroll">
+    <Picture scene={refreshScenes.passes} alt="단체 피지컬 수업의 AI 재구성 이미지"/>
+    <p className="caption">{reconstructionCaption}</p>
+    <div className="jeonju-enroll-copy">
+     <h3>상담·회원권 안내</h3>
+     <p>처음 방문하시는 분은 상담예약을 이용해 주세요. 기존 회원은 기록시스템에 로그인해 회원권 메뉴를 확인할 수 있습니다.</p>
+     <External href={branch.booking} className="button">처음 방문 · 상담예약</External>
+     <External href={recordService} className="text-link">기존 회원 · 기록시스템 열기</External>
+    </div>
+   </div>
+  </div>
+ </section>;
+}
+
+function JeonjuEvents() {
+ return <section className="jeonju-events section-pad" id="jeonju-events">
+  <div className="shell">
+   <SectionHeading title="체육관 이벤트">참여 기간과 혜택은 회원 공지에서 확인해 주세요.</SectionHeading>
+   <div className="jeonju-event-grid">
+    {jeonjuEvents.map(({title,description,href,action})=><article key={title}>
+     <h3>{title}</h3><p>{description}</p>
+     {href===recordService?<External className="text-link" href={href}>{action}</External>:<a className="text-link" href={href}>{action} {arrow}</a>}
+    </article>)}
+   </div>
+  </div>
+ </section>;
+}
+
 function Branch({id}) {
- const b=branches[id]; const [selected,setSelected]=useState(null);
+ const b=branches[id]; const isJeonju=id==='jeonju'; const [selected,setSelected]=useState(null);
  const heading=useRef(null); const trigger=useRef(null);
  function close(){setSelected(null);trigger.current?.focus({preventScroll:true});trigger.current?.scrollIntoView({behavior:motionBehavior(),block:'center'})}
  function choose(p,e){trigger.current=e.currentTarget;if(selected===p.id)close();else setSelected(p.id)}
@@ -50,11 +108,14 @@ function Branch({id}) {
  const program=b.programs.find(p=>p.id===selected);
  const lessonTimes={'physical-training':'평일 10:00 · 19:00 · 21:00','adult-boxing':'평일 20:00','kids-boxing':'평일 15:00 · 17:00'};
  const lessonAudience={'physical-training':'전신 체력과 지구력을 기르고 싶은 분','adult-boxing':'성인 · 고학년 학생','kids-boxing':'초등학생 · 중학생'};
- const parts=id==='jeonju'&&selected?lessons[selected].parts.map(p=>({...p,scene:p.photoScene?'assets/jeonju/'+(p.photoScene==='heavy-bag'?'09-heavy-bag':'10-circuit'):undefined})):yeoksamParts;
-return <><BranchNav id={id}/><section className="branch-intro shell"><div className="branch-copy"><a href="#home" className="back-link">← 지점 선택</a><p className="branch-name">{b.official}</p><h1>{b.title.map(t=><span key={t} data-reveal="line">{t}</span>)}</h1><p className="lead" data-reveal="rise">{b.description}</p><div className="actions"><External className="button" href={b.booking}>상담예약</External><a href={`#${id}/programs`} className="text-link">프로그램 살펴보기 {arrow}</a></div><p className="hero-fact">{b.address}<br/>{b.hours[0].join(' ')} · <a href={'tel:'+b.phone.replaceAll('-','')}>{b.phone}</a></p></div><figure className="branch-hero" data-reveal="image"><Picture scene={b.hero} priority alt={b.name+'의 운동 분위기를 표현한 AI 콘셉트 사진'}/><figcaption className="caption">{id==='jeonju'?reconstructionCaption:'수업 이해를 돕기 위한 AI 콘셉트 사진'}</figcaption></figure></section>
+ const parts=isJeonju&&selected?lessons[selected].parts:yeoksamParts;
+return <><BranchNav id={id}/><section className="branch-intro shell"><div className="branch-copy"><a href="#home" className="back-link">← 지점 선택</a><p className="branch-name">{b.official}</p><h1>{b.title.map(t=><span key={t} data-reveal="line">{t}</span>)}</h1><p className="lead" data-reveal="rise">{b.description}</p><div className="actions"><External className="button" href={b.booking}>상담예약</External><a href={`#${id}/programs`} className="text-link">프로그램 살펴보기 {arrow}</a>{isJeonju&&<a href="#jeonju/pricing" className="text-link">이용요금 {arrow}</a>}</div><p className="hero-fact">{b.address}<br/>{b.hours[0].join(' ')} · <a href={'tel:'+b.phone.replaceAll('-','')}>{b.phone}</a></p></div><figure className="branch-hero" data-reveal="image"><Picture scene={isJeonju?refreshScenes.hero:b.hero} priority alt={b.name+'의 운동 분위기를 표현한 AI 콘셉트 사진'}/><figcaption className="caption">{id==='jeonju'?reconstructionCaption:'수업 이해를 돕기 위한 AI 콘셉트 사진'}</figcaption></figure></section>
 <section className="intro-story shell section-pad" id={`${id}-about`}><p className="location-line" data-reveal="rise">{b.name}</p><div><h2 data-reveal="rise">{b.intro}</h2><p className="body-large" data-reveal="rise">{b.introText}</p>{id==='yeoksam'&&<p className="quiet" data-reveal="rise">네이버 소개에 안내된 지도진: 곽기성 코치 · 김광철 코치. 현재 수업 배정과 지도 일정은 방문 전 확인해 주세요.</p>}</div></section>
-<section className="program-section section-pad" id={`${id}-programs`}><div className="shell"><SectionHeading title={id==='jeonju'?<>나에게 맞는 운동을<br/>찾아보세요.</>:<>복싱 수업의<br/>훈련 구성.</>}>{id==='jeonju'?<>수업 방식을 알고 나면,<br/>첫 시작이 한결 편안해집니다.</>:<>하나의 복싱 루틴에서<br/>기본기·타격·체력을 연결합니다.</>}</SectionHeading><div className="program-grid grid md:grid-cols-3 gap-6">{b.programs.map(p=><article className="program" key={p.id} data-reveal="rise"><Picture scene={p.scene} alt={p.name+' AI 콘셉트 사진'}/><h3>{p.name}</h3><p>{p.description}</p>{id==='jeonju'&&<p className="program-time">{lessonTimes[p.id]}</p>}<button className="program-open" aria-expanded={selected===p.id} aria-controls={id+'-details'} onClick={e=>choose(p,e)}>수업 자세히 보기 <span aria-hidden="true">{selected===p.id?'−':'+'}</span><span className="sr-only">: {p.name}</span></button><noscript><p>{p.detail}</p></noscript></article>)}</div><div hidden={!selected} id={id+'-details'} className="program-details" role="region" aria-labelledby={id+'-detail-title'} onKeyDown={e=>{if(e.key==='Escape'){e.preventDefault();e.stopPropagation();close()}}}>{program&&<><div className="detail-toolbar"><div><h3 id={id+'-detail-title'} ref={heading} tabIndex="-1">{program.name}</h3>{id==='jeonju'?<p className="detail-meta"><strong>{lessonTimes[selected]}</strong><span>{lessonAudience[selected]}</span></p>:<p className="detail-meta">복싱 수업의 훈련 구성 · 지도 방식과 일정은 상담에서 안내합니다.</p>}</div><button aria-label="수업 상세 닫기" onClick={close}>닫기 ×</button></div><p className="detail-description">{program.description}</p><div className="detail-program-switch" role="group" aria-label="다른 수업 선택">{b.programs.map(p=><button key={p.id} aria-pressed={p.id===selected} onClick={()=>setSelected(p.id)}>{p.name}</button>)}</div><LessonCarousel key={selected} parts={parts} program={selected}/><p className="caption">{id==='jeonju'?'사진은 실제 수업 구도를 참고한 AI 재구성 및 운동별 콘셉트 이미지입니다. 인물·시설 세부는 실제와 다를 수 있으며, 영상은 기존 실제 수업을 편집한 장면입니다.':'사진은 수업 이해를 돕기 위한 AI 콘셉트입니다.'}</p></>}</div></div></section>
-<section className="prices shell section-pad" id={`${id}-pricing`}><SectionHeading label="이용요금" title="내 운동에 맞는 선택.">이용 조건까지 확인하고<br/>편안하게 상담받으세요.</SectionHeading><div className="price-list">{b.prices.map(([title,price,desc])=><div className="price-row" key={title} data-reveal="rise"><h3>{title}</h3><p>{desc}</p><strong>{price}</strong></div>)}</div><p className="price-note" data-reveal="rise">{b.priceNote}</p><External href={b.booking} className="text-link">예약·상담 안내 보기</External></section>
+<section className="program-section section-pad" id={`${id}-programs`}><div className="shell"><SectionHeading title={id==='jeonju'?<>나에게 맞는 운동을<br/>찾아보세요.</>:<>복싱 수업의<br/>훈련 구성.</>}>{id==='jeonju'?<>수업 방식을 알고 나면,<br/>첫 시작이 한결 편안해집니다.</>:<>하나의 복싱 루틴에서<br/>기본기·타격·체력을 연결합니다.</>}</SectionHeading><div className="program-grid grid md:grid-cols-3 gap-6">{b.programs.map(p=><article className="program" key={p.id} data-reveal="rise"><Picture scene={isJeonju&&p.id==='kids-boxing'?refreshScenes.kids:p.scene} alt={p.name+' AI 콘셉트 사진'}/><h3>{p.name}</h3><p>{p.description}</p>{id==='jeonju'&&<p className="program-time">{lessonTimes[p.id]}</p>}<button className="program-open" aria-expanded={selected===p.id} aria-controls={id+'-details'} onClick={e=>choose(p,e)}>수업 자세히 보기 <span aria-hidden="true">{selected===p.id?'−':'+'}</span><span className="sr-only">: {p.name}</span></button><noscript><p>{p.detail}</p></noscript></article>)}</div><div hidden={!selected} id={id+'-details'} className="program-details" role="region" aria-labelledby={id+'-detail-title'} onKeyDown={e=>{if(e.key==='Escape'){e.preventDefault();e.stopPropagation();close()}}}>{program&&<><div className="detail-toolbar"><div><h3 id={id+'-detail-title'} ref={heading} tabIndex="-1">{program.name}</h3>{id==='jeonju'?<p className="detail-meta"><strong>{lessonTimes[selected]}</strong><span>{lessonAudience[selected]}</span></p>:<p className="detail-meta">복싱 수업의 훈련 구성 · 지도 방식과 일정은 상담에서 안내합니다.</p>}</div><button aria-label="수업 상세 닫기" onClick={close}>닫기 ×</button></div><p className="detail-description">{program.description}</p><div className="detail-program-switch" role="group" aria-label="다른 수업 선택">{b.programs.map(p=><button key={p.id} aria-pressed={p.id===selected} onClick={()=>setSelected(p.id)}>{p.name}</button>)}</div><LessonCarousel key={selected} parts={parts} program={selected}/><p className="caption">{id==='jeonju'?'사진은 실제 수업 구도를 참고한 AI 재구성 및 운동별 콘셉트 이미지입니다. 인물·시설 세부는 실제와 다를 수 있으며, 영상은 기존 실제 수업을 편집한 장면입니다.':'사진은 수업 이해를 돕기 위한 AI 콘셉트입니다.'}</p></>}</div></div></section>
+{isJeonju?<><JeonjuPasses branch={b}/><JeonjuEvents/></>:<section className="prices shell section-pad" id={`${id}-pricing`}>
+ <SectionHeading label="이용요금" title="내 운동에 맞는 선택.">이용 조건까지 확인하고<br/>편안하게 상담받으세요.</SectionHeading>
+ <PriceList prices={b.prices}/><p className="price-note" data-reveal="rise">{b.priceNote}</p><External href={b.booking} className="text-link">예약·상담 안내 보기</External>
+</section>}
 <section className="guide section-pad" id={`${id}-guide`}><div className="shell"><SectionHeading title={id==='jeonju'?"나의 시간, 오늘의 운동.":"오늘의 운동을 준비하세요."}/>{id==='jeonju'?<div className="schedule-layout"><div className="schedule-intro"><Picture scene="assets/jeonju/06-morning" alt="아침 운동 분위기의 AI 콘셉트 사진"/><h3 data-reveal="rise">아침부터 저녁까지,<br/>나에게 맞는 시간.</h3></div><div className="timetable">{schedule.map(([time,name])=><div className="time-row" key={time} data-reveal="rise"><time>{time}</time><span>{name}</span></div>)}</div></div>:<div className="routine-banner"><Picture scene="assets/yeoksam/bag" alt="샌드백 훈련 AI 콘셉트 사진"/><div><h3 data-reveal="rise">오늘의 루틴,<br/>코치와 함께 차근차근.</h3><p data-reveal="rise">몸풀기 → 스텝·쉐도우 → 미트 → 샌드백.<br/>순서와 운동 강도는 코치와 확인합니다.</p></div></div>}<div className="hours-prepare" data-ui="operating-hours"><div><h3 data-reveal="rise">운영시간</h3>{b.hours.map(([day,time])=><div className="hours-row" key={day} data-reveal="rise"><span>{day}</span><strong>{time}</strong></div>)}<p className="quiet" data-reveal="rise">{b.hoursNote}</p></div><div><h3 data-reveal="rise">첫 방문 준비</h3><ol className="prepare-list">{b.visit.map(t=><li key={t} data-reveal="rise">{t}</li>)}</ol>{id==='jeonju'&&<Picture scene="assets/jeonju/07-first-visit" alt="실내용 운동화와 개인 줄넘기, 물병 준비물 콘셉트 사진"/>}</div></div></div></section>
 {id==='yeoksam'&&<section className="news shell section-pad"><SectionHeading label="지점 소식" title="알아두면 좋은 안내."/><div className="news-list">{b.news.map(([t,d])=><article key={t} data-reveal="rise"><h3>{t}</h3><p>{d}</p></article>)}</div><External href="https://m.place.naver.com/place/2024734294/feed" className="text-link">네이버에서 최신 소식 보기</External></section>}
 <section className="visit shell section-pad" id={`${id}-visit`}><SectionHeading label="오시는 길" title={b.name+'에서 만나요.'}/><div className="visit-grid"><div><p className="address" data-reveal="rise">{b.address}</p><p data-reveal="rise">{b.travel}</p><p data-reveal="rise">{b.parking}</p><ul className="amenities">{b.amenities.map(x=><li key={x} data-reveal="rise">{x}</li>)}</ul><External className="text-link" href={b.map}>네이버 지도 열기</External><p className="caption">지도·예약·SNS 등 외부 연결은 인터넷이 필요합니다.</p></div><div className="visit-contact"><h3 data-reveal="rise">나에게 맞는 시작을<br/>함께 찾아보세요.</h3><a className="phone" href={'tel:'+b.phone.replaceAll('-','')} data-reveal="rise">{b.phone}</a><External className="button" href={b.booking}>상담예약</External><div className="social-links"><External href={b.place}>네이버 플레이스</External><External href={b.instagram}>Instagram</External>{b.blog&&<External href={b.blog}>블로그</External>}{b.youtube&&<External href={b.youtube}>YouTube</External>}</div></div></div><details className="source-note"><summary>정보 출처와 확인일</summary><p>확인일 {checked}. 지점의 네이버 플레이스와 운영자 확인 자료를 참고했습니다. 역삼 회원권은 최신 가격표에 따라 전화 문의로 안내합니다. 전주 요금·시간표·대표 전화는 운영자가 확인한 자료를 사용했습니다. 행사·할인·지도 배정 등은 방문 전 확인해 주세요.</p><External href={b.source}>공식 정보 확인</External></details></section><div className="mobile-cta"><External href={b.booking} className="button">{b.name} 상담예약</External></div></>}

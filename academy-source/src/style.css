@@ -68,3 +68,30 @@ footer{background:var(--ink);color:var(--paper);padding-block:64px 30px}.footer-
 @media (max-width: 700px) {
   .philosophy-feature, .philosophy-grid {grid-template-columns: 1fr; gap: 22px;}
 }
+
+/* Jeonju public branch pricing and event preview */
+.jeonju-passes-layout{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:32px;align-items:start}
+.jeonju-passes .price-row{grid-template-columns:minmax(0,1fr) auto;gap:7px 16px;padding:22px 24px}
+.jeonju-passes .price-row h3{font-size:clamp(18px,2.1vw,25px)}
+.jeonju-passes .price-row p{grid-row:2;grid-column:1/-1;color:var(--muted)}
+.jeonju-passes .price-row strong{grid-row:1;grid-column:2;font-variant-numeric:tabular-nums;font-size:clamp(22px,3vw,33px);white-space:nowrap}
+.jeonju-enroll{overflow:hidden;background:var(--tone)}
+.jeonju-enroll .photo,.jeonju-enroll .photo img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
+.jeonju-enroll>.caption{padding:0 20px;margin-top:8px}
+.jeonju-enroll-copy{padding:12px 20px 22px;display:grid;gap:12px;justify-items:start}
+.jeonju-enroll-copy h3,.jeonju-event-grid h3{font-size:clamp(21px,2.2vw,28px);line-height:1.2}
+.jeonju-enroll-copy .text-link,.jeonju-event-grid .text-link{display:inline-flex;align-items:center;gap:7px;min-height:44px;margin:0}
+.jeonju-events{background:var(--tone)}
+.jeonju-event-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.jeonju-event-grid article{display:grid;align-content:start;gap:10px;padding:25px;background:white;border-top:3px solid var(--ink)}
+.jeonju-event-grid p{min-height:3em}
+@media(max-width:1000px){.jeonju-passes-layout{gap:18px}.jeonju-passes .price-row{padding:18px}.jeonju-event-grid article{padding:20px}}
+@media(max-width:700px){.jeonju-passes-layout,.jeonju-event-grid{grid-template-columns:minmax(0,1fr)}.jeonju-passes .price-row{padding:16px}.jeonju-event-grid p{min-height:auto}.jeonju-enroll .photo img{object-position:center 44%}}
+
+@media(max-width:700px){
+ #jeonju .branch-intro{gap:18px;padding-block:20px 32px}
+ #jeonju .branch-hero{order:-1}
+ #jeonju .branch-copy .back-link{margin-bottom:8px}
+ #jeonju .branch-copy .actions{gap:10px 14px}
+ #jeonju .branch-copy .actions .button{padding-inline:16px}
+}

@@ -1,4 +1,4 @@
-const sections = new Set(['about', 'programs', 'pricing', 'guide', 'visit', 'typing', 'record', 'philosophy']);
+const sections = new Set(['about', 'programs', 'pricing', 'events', 'guide', 'visit', 'typing', 'record', 'philosophy']);
 const legacy = {about:'about', programs:'programs', pricing:'pricing', schedule:'guide', facilities:'visit', contact:'visit', reservation:'visit', booking:'visit'};
 
 export function parseRoute(hash = '') {
@@ -9,7 +9,7 @@ export function parseRoute(hash = '') {
   if (page === 'jeonju' && section === 'philosophy') {
     return {page, section, ...(article && rest.length === 0 && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(article) ? {article} : {})};
   }
-  return {page, section: sections.has(section) && (!['typing','record','philosophy'].includes(section) || page === 'jeonju') && ['yeoksam','jeonju'].includes(page) ? section : null};
+  return {page, section: sections.has(section) && (!['typing','record','philosophy','events'].includes(section) || page === 'jeonju') && ['yeoksam','jeonju'].includes(page) ? section : null};
 }
 
 export function motionBehavior() {

@@ -43,6 +43,7 @@ export const curricula = {
 
 
 // Two actual RandomCut class highlights precede, rather than replace, the exercise photos.
+const refreshedPosters=new Set(['boxing-1','physical-2','kids-1']);
 const videoPrograms = { 'physical-training': 'physical', 'adult-boxing': 'boxing', 'kids-boxing': 'kids' };
 for (const [id, stem] of Object.entries(videoPrograms)) {
   const description = id === 'physical-training'
@@ -51,16 +52,13 @@ for (const [id, stem] of Object.entries(videoPrograms)) {
       ? '저녁 8시 모두의 복싱, 함께 기본기를 연습하는 수업 모습입니다.'
       : '키즈복싱 수업에서 함께 배우고 움직이는 모습을 만나보세요.';
   curricula[id].parts.unshift(...[1, 2].map(n => ({
-    image: `assets/videos/${stem}-${n}.webp`,
+    image: refreshedPosters.has(`${stem}-${n}`)
+      ? `assets/jeonju/refresh-20261119/${stem}-${n}-poster.webp`
+      : `assets/videos/${stem}-${n}.webp`,
     video: `assets/videos/${stem}-${n}.mp4`,
     title: n === 1 ? '수업 하이라이트' : '함께하는 훈련',
     description,
   })));
-}
-
-for (const part of curricula['physical-training'].parts) {
-  if (part.title === '헤비백 타격') part.photoScene = 'heavy-bag';
-  if (part.title === '서킷트레이닝') part.photoScene = 'circuit';
 }
 
 // Keep the original two real videos first and retain every existing exercise photo.
