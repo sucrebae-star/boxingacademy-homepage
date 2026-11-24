@@ -12,6 +12,7 @@ const outFlag=process.argv.indexOf('--out');
 const output=path.resolve(outFlag>=0?process.argv[outFlag+1]:(production?'output-web':'output'));
 if(output===root||output===path.dirname(root)||output.startsWith(path.join(root,'src')+path.sep)||output===path.join(root,'assets'))throw Error('Use a separate build output directory');
 await mkdir(output,{recursive:true});await mkdir('.build',{recursive:true});
+await cp('new-member-guide',path.join(output,'new-member-guide'),{recursive:true});
 const types={'.webp':'image/webp','.png':'image/png','.jpg':'image/jpeg','.svg':'image/svg+xml','.woff2':'font/woff2','.mp4':'video/mp4'};
 async function assetPaths(dir){let result=[];for(const d of await readdir(dir,{withFileTypes:true})){const p=path.posix.join(dir,d.name);result.push(...(d.isDirectory()?await assetPaths(p):[p]));}return result;}
 // Superseded UI captures remain in source for old published pages, not in the new gallery/bundle.
@@ -65,7 +66,7 @@ if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serv
  await writeFile(path.join(output,'record-system.html'),recordHtml);
  await writeFile(path.join(output,'CNAME'),new URL(origin).hostname+'\n');
  await writeFile(path.join(output,'robots.txt'),`User-agent: *\nAllow: /\nSitemap: ${origin}/sitemap.xml\n`);
- await writeFile(path.join(output,'sitemap.xml'),`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${origin}/</loc></url><url><loc>${origin}/typing-academy.html</loc></url><url><loc>${origin}/record-system.html</loc></url></urlset>\n`);
+ await writeFile(path.join(output,'sitemap.xml'),`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${origin}/</loc></url><url><loc>${origin}/typing-academy.html</loc></url><url><loc>${origin}/record-system.html</loc></url><url><loc>${origin}/new-member-guide/</loc></url></urlset>\n`);
  await writeFile(path.join(output,'manifest.json'),JSON.stringify({name:'복싱사관학교',short_name:'복싱사관학교',start_url:'./',scope:'./',display:'standalone',background_color:'#171A1B',theme_color:'#171A1B',icons:[{src:data['assets/icon-192.png'],sizes:'192x192',type:'image/png',purpose:'any'},{src:data['assets/icon-512.png'],sizes:'512x512',type:'image/png',purpose:'any'}]},null,2));
  const precache=['index.html','manifest.json',cssName,appName,routeName,data['assets/logo.png'],data['assets/icon-192.png'],data['assets/icon-512.png'],data['assets/pretendard-variable.woff2']];
  const worker=`const CACHE='boxingacademy-v2-${version}',FILES=${JSON.stringify(precache)};const base=new URL('./',self.location.href);const urls=FILES.map(p=>new URL(p,base).href);
